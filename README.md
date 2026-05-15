@@ -1,293 +1,182 @@
-# 🎓 The Pieces of Us · Together — Complete Learning & Development Roadmap
+# 💖 The Pieces of Us · Together — Complete MVP Design Document
 
-*A zero‑to‑MVP guide for building a heartfelt 2D puzzle‑platformer in Godot as an Android APK.  
-Made for her 18th birthday on June 27. No prior experience required.*
-
----
-
-## 1. Overview & Time Budget
-
-- **Total available days:** 44 (May 14 → June 27)
-- **Daily commitment:** ~3 hours (≈ 132 total hours)
-- **End product:** A 10‑15 minute 2‑level game with dual‑character switching, memory‑item puzzles, dialogue, and a personal epilogue.
-- **Core philosophy:** Learn only what you need, build as you learn, ship from the heart.
+*A heartfelt, 2D puzzle‑platformer built in Godot for Android.  
+Made with love for her 18th birthday on June 27th.  
+Scope: 2 levels, 2 memory items, a full emotional arc, and plenty of dialogue.*
 
 ---
 
-## 2. Skill Map & Detailed Breakdown
+## 📖 1. Story & Emotional Arc (Full MVP Narrative)
 
-### 2.1 Godot Engine Fundamentals (8‑10 h)
-You need to be able to create scenes, add nodes, use the inspector, and export an APK.
+### Prologue – "The Drift"
+- The screen fades in on a starry void. Two soft silhouettes stand far apart on tiny floating islands.
+- Text appears slowly, letter by letter:
+  > **You:** "I'm here... where are you?"  
+  > **Her:** "I can't see you. Find me."
+- The island beneath Her crumbles slightly. The screen fades to white.
 
-| Sub‑skill | What you'll do | Time | Recommended resources |
-|-----------|----------------|------|------------------------|
-| **Interface & Scene System** | Navigate the editor, create 2D scenes, save/run. | 2h | Official docs "Step by Step" + Godot 4 2D tutorial (GDQuest/GameDev.tv) |
-| **Nodes & Scenes** | Understand `Node2D`, `Sprite2D`, `Area2D`, `CollisionShape2D`, `CharacterBody2D`, `Camera2D`, `TileMap`, `PointLight2D`. | 2h | Godot documentation node pages; practice by adding each to a scene. |
-| **Signals & basic connections** | Connect buttons, detect collisions, react to input. | 1.5h | "Dodge the Creeps" tutorial covers signals. |
-| **Input Map & Touch** | Set up on‑screen buttons, map to actions (`ui_left`, `ui_right`, `jump`, `action`). | 1.5h | Godot "Mobile game with touch buttons" tutorials on YouTube. |
-| **Export to APK** | Install Android build template, generate debug APK, test on phone. | 1h | Godot docs "Exporting for Android"; enable USB debugging on your phone. |
-| **Total** | | **8h** | |
+### Act 1 – "First Hello" (Level 1: The Café)
+**Theme:** The early, gentle moments of getting to know each other.  
+**Environment:** A warm but dimly lit café corner. Mismatched chairs, a wooden counter, floating coffee cups in the background, sticky notes on a wall.  
+**Memory Item:** *Cat Doodle* – a silly, poorly drawn cat you once sketched on a napkin.
 
-**Mini‑exercises to lock it in:**
-1. Create a scene with a colored rectangle and a `Camera2D`; make it move left/right with keyboard.
-2. Add a second scene and switch between them using a button.
-3. Build a simple test with on‑screen touch buttons (use `TouchScreenButton` nodes) and run it on your phone.
+#### Key Dialogue Beats (Level 1)
+1. **Level Start** – Characters appear on opposite sides of the counter.
+   > **Her:** "It’s so dark over here... I can't see the way."  
+   > **You:** "Hold on. I’ll find something."
+2. **When You pushes the sack onto the switch** (a dim light flickers on):
+   > **You:** "A little light. That's a start."
+3. **When Her picks up the Cat Doodle**:
+   > **Her (inner thought):** "This little cat... he drew this the day we laughed until we cried."
+4. **When the Cat Doodle is used** (a floating cat platform appears):
+   > **Her:** "Even your silliest drawings save me."
+5. **After the Music Box is activated** (full light floods the room):
+   > **You:** "The whole room is bright now."
+   > **Her:** "Because we made it bright. Together."
+6. **At the Memory Stone** (checkpoint at the end of the level):
+   > **You:** "Even in the dark, we found a way."
+   > **Her:** "Because you left me a little light."
 
----
+### Act 2 – "Growing Together" (Level 2: The Hilltop)
+**Theme:** Facing small storms together.  
+**Environment:** A windy hilltop under a night sky, a rickety wooden bench, fireflies, and a swirling grey storm cloud in the distance.  
+**Memory Item:** *Handwritten Note* – a real love letter you once gave her.
 
-### 2.2 GDScript Coding Skills (10‑12 h)
-You don't need to be a programmer – just enough to write simple scripts that control the game.
+#### Key Dialogue Beats (Level 2)
+1. **Level Start** – Wind visibly blows. Her gets pushed back.
+   > **Her:** "This wind is too strong... I can't walk against it!"  
+   > **You:** "Wait there. I'll stop the storm."
+2. **When You breaks the rock wall** to reveal the note:
+   > **You (inner thought):** "Every word I ever wrote was to bring her peace."
+3. **When You picks up the Handwritten Note**:
+   > **You:** "I remember writing this. I meant every word."
+4. **When the Note is used on the storm pedestal** (wind stops, clouds part):
+   > **Her:** "The storm... it's gone."
+   > **You:** "Only because you're standing there."
+5. **At the Memory Stone under the tree**:
+   > **Her:** "You wrote away the storm."
+   > **You:** "I’d write away anything for you."
 
-| Sub‑skill | Where it's used | Time | Learning approach |
-|-----------|-----------------|------|-------------------|
-| **Variables, `export`, `@onready`** | Storing player speed, item references. | 1h | Follow along with beginner GDScript series (e.g., "GDScript in 10 minutes"). |
-| **Functions & `_process`/`_physics_process`** | Movement code, checking states each frame. | 1.5h | Write small scripts that print a number every frame, then move a sprite. |
-| **If statements & simple state** | Is this the active character? Is an item held? | 1h | Create a state variable and toggle behavior (e.g., change color on press). |
-| **Vectors & movement (`velocity`, `move_and_slide`)** | Basic platformer physics. | 2h | Copy the `CharacterBody2D` movement template from the official docs; modify it. |
-| **Signals & custom signals** | Trigger dialogue, puzzle solved event. | 1.5h | Define a custom signal `puzzle_solved` and emit it when an `Area2D` is entered. |
-| **Autoloads (singletons)** | `GameManager` and `DialogueManager` global scripts. | 1.5h | Create a singleton that stores a variable; access it from another scene. |
-| **Tween basics (`create_tween()`)** | Camera pan, UI fade, island animations. | 1h | Animate a sprite's position or modulate with one line of code. |
-| **Collision layers & masks** | Who can push, who can break. | 1h | Set up layers and use `move_and_collide` to detect pushable objects. |
-| **Total** | | **10h** | |
-
-**Mini‑exercises:**
-1. Make a ball that bounces using `move_and_slide()`.
-2. Create a `Coin` scene with an `Area2D` that prints "collected" when entered.
-3. Build an autoload that keeps a score, then display it on a label.
-
----
-
-### 2.3 2D Platformer & Character Switching (5‑6 h)
-These are the specific gameplay mechanics of your game.
-
-| Sub‑skill | Implementation detail | Time | Tips |
-|-----------|-----------------------|------|------|
-| **CharacterBody2D movement with touch** | Left/right, jump, apply gravity, handle `Input.get_action_strength()`. | 1h | Use the template from the official "2D movement" docs; bind touch buttons. |
-| **Switching between two players** | Two `CharacterBody2D` scenes; a global variable tracks `active_player`; `_input` only works for the active one. | 2h | Create a heart button that toggles a string `"you"` / `"her"`, and each player script checks if it's active. |
-| **Pushable block** | A separate `CharacterBody2D` that moves when the player collides with it while holding a direction. | 1.5h | Use `move_and_collide` on the block; apply a velocity based on the player's direction. |
-| **Breakable wall** | A `StaticBody2D` with an `Area2D` child; when the player with the "You" tag enters, queue_free(). | 1h | Use collision masks so only "You" can trigger it. |
-| **PointLight2D / darkness** | Hide a tilemap layer until a light source reveals it; or use a light mask. | 1.5h | Create a `PointLight2D` on the "Her" scene; set the tilemap's `light_mask` so it's only visible when illuminated. |
-| **Total** | | **6h** | |
-
-**Mini‑exercises:**
-1. Prototype the switch mechanic with two colored rectangles – tap the heart to control the other.
-2. Make a crate that can be pushed and stops at walls.
-3. Add a simple dark room: everything is black until the light character walks near, then a circle reveals platforms.
-
----
-
-### 2.4 UI & Dialogue System (6‑8 h)
-You need a dialogue box, an inventory indicator, a pause menu, and a title screen.
-
-| Sub‑skill | What it does | Time | How to learn |
-|-----------|--------------|------|---------------|
-| **Control nodes basics** | `Panel`, `Label`, `TextureButton`, `MarginContainer`. | 1.5h | Build a simple title screen with a start button that changes scene. |
-| **TouchScreenButton & anchors** | Position buttons for mobile, use anchors and margins. | 1h | Experiment with `Control` layout options; test on different screen sizes in the editor. |
-| **Dialogue manager autoload** | Store lines in a dictionary, display them character‑by‑character, wait for tap to advance. | 3h | Create a `DialogueManager` singleton with functions `show_dialogue(trigger_id)` and `advance()`. Use a `Timer` to reveal text slowly. |
-| **CanvasLayer** | Keep HUD and dialogue on top of the game world. | 0.5h | Attach all UI to a `CanvasLayer` node. |
-| **Scene transitions** | Fade to black between levels. | 0.5h | Use a `ColorRect` and `create_tween()` to animate its `modulate.a`. |
-| **Total** | | **6h** | |
-
-**Mini‑exercises:**
-1. Create a text box that shows "Hello" when you enter an `Area2D` and hides when you leave.
-2. Make a dialogue system where tapping advances through multiple lines stored in an array.
-3. Build a simple pause overlay that stops the game.
+### Epilogue – "You Found Me"
+- Both characters stand together on a single, solid platform under a canopy of stars. Fireflies drift around them.
+- The UI shows a single glowing heart. Tapping it triggers a gentle hug animation.
+- Final dialogue appears in a beautiful, slow typewriter effect:
+  > **Her:** "You found me."  
+  > **You:** "I always will. Happy 18th birthday, [Her Name]."
+- The screen fades into a personal letter from you, followed by one or two real photos. A small text at the bottom reads: *"Press anywhere to save a memory."* (If implemented, she can tap to save a screenshot of the in‑game moment to her phone gallery.)
+- Background music softens, and an optional whispered "I love you" plays.
 
 ---
 
-### 2.5 Pixel Art & Simple Animation (6‑10 h)
-A charming, minimal style works – you don't need to be an artist.
+## 🗺️ 2. World Map – Simplified but Still Meaningful
 
-| Sub‑skill | Tools / Approach | Time | Resources |
-|-----------|------------------|------|-----------|
-| **Pixel art editor basics** | Aseprite (paid) / LibreSprite (free) / Piskel (browser). Learn canvas, layers, onion skin. | 1h | YouTube: "Pixel art for beginners" (Brandon James Greer, AdamCYounis). |
-| **Designing a tiny character (32×48)** | Silhouette, limited palette (3‑5 colors), simple features. | 2h | Study "chibi pixel art" references; sketch with basic shapes. |
-| **Idle animation (3 frames)** | Slight up‑down bob, maybe a blink. | 1h | Duplicate frame, move a few pixels, toggle onion skin. |
-| **Run animation (2‑4 frames)** | Simple leg movement, one step per frame. | 1.5h | Keep it super simple; even a sliding motion with a bounce can work. |
-| **Tileset creation** | Ground, wall, counter tiles – 16×16 or 32×32 that repeat. | 2h | Use a grid; draw a few variations for dirt, wood, bricks. |
-| **Backgrounds** | Soft gradient or starry sky (non‑pixel). | 1h | Can be done in any program (even Canva or a photo blurred). |
-| **Total** | | **8h** | |
+Since this is an MVP, there is no separate interactive world map screen. Instead, the flow is linear but visually linked:
 
-**Shortcuts:**  
-- If drawing is too hard, use Kenney's free 1‑bit or platformer packs and recolor them.  
-- For animation, 2‑frame "bobbing" is fine – nobody expects smooth 60fps sprites from a handmade gift.
+- **Prologue Scene** → fades to **Level 1** → after completing Level 1, a short transition shows the two islands drifting slightly closer → **Level 2** → transition with islands almost touching → **Epilogue** (islands merge).
+- These transitions are simple 2-second animations (a tween moving two image sprites closer) and require only a single static background image split into two parts. It adds immense emotional value for very little work.
+
+**Godot Implementation:**  
+Create a `Transition.tscn` with two `Sprite2D` nodes (islands) and an `AnimationPlayer` that tweens their positions. Call it between levels.
 
 ---
 
-### 2.6 Audio Sourcing & Editing (3‑4 h)
-No composing required – just find free music and cut it.
+## 👫 3. Characters – "You" and "Her" (Detailed)
 
-| Sub‑skill | What you'll do | Time | Places to search |
-|-----------|----------------|------|------------------|
-| **Finding royalty‑free music** | One soft, looping instrumental. | 1h | Pixabay Music, Incompetech, FreeSound. Keywords: "soft ukulele lullaby", "calm piano loop". |
-| **Basic audio editing (Audacity)** | Trim, loop, adjust volume, export as OGG. | 1.5h | Install Audacity (free); YouTube "Audacity loop music" tutorial. |
-| **Adding audio to Godot** | `AudioStreamPlayer` nodes, trigger on item pickup. | 1h | Godot docs: "Audio Streams". |
-| **Total** | | **3.5h** | |
+### Visual Design
+- **Style:** Minimal chibi or simple capsule characters (rounded rectangles) with distinct colors and one defining feature.
+- **You:** Soft teal/blue, slightly taller or broader. Optional: a tiny scarf or glasses.
+- **Her:** Warm pink/orange, a small flower or hair bow drawn on top.
+- **Size:** 32×48 pixels, with simple 3‑frame animations: idle (gentle bob), run (2 frames), jump (1 frame).
 
-**Mini‑exercise:**  
-1. Find a loop, trim it to a perfect loop in Audacity, put it in Godot and make it play when the game starts.
+### Abilities
+| Character | Ability | How It Works |
+|-----------|---------|---------------|
+| **You** | **Strong Push** | Walk into a marked "Pushable" block (CharacterBody2D with a script) to move it. Walk into a "Breakable Wall" (StaticBody2D with an Area2D) to destroy it. |
+| **Her** | **Light Up** | While holding the action button, a `PointLight2D` child node activates, revealing hidden `TileMap` layers or platforms that have their visibility tied to the light radius. |
 
----
-
-## 3. Integrated Week‑by‑Week Learning & Building Plan
-
-### Week 1 (May 14‑20) – Foundation
-**Learning focus:** Godot basics, touch movement, character switching prototype.  
-**Daily breakdown:**
-- **Day 1‑2:** Complete "Dodge the Creeps" tutorial (3h). Get comfortable with editor, scenes, signals.
-- **Day 3:** Build a test scene with a rectangle that moves with touch buttons. Test on phone (3h).
-- **Day 4:** Add a second rectangle. Create a heart button that switches control between them (3h).
-- **Day 5:** Implement pushable block and breakable wall on rectangles (3h).
-- **Day 6:** Add a `PointLight2D` to the "Her" rectangle; make dark tiles appear when illuminated (3h).
-- **Day 7:** Rest, review all code, fix any bugs, test on phone again.
-
-**Checkpoint:** You have two colored rectangles that can switch, push, break, and light up. The tech is proven.
-
-### Week 2 (May 21‑27) – Level 1
-**Learning focus:** Tilemaps, puzzle logic, trigger dialogue.  
-**Daily:**
-- **Day 1‑2:** Learn `TileMap` basics, draw a simple café layout (counter, floor). (2h learning + 1h building).
-- **Day 3‑4:** Transfer switch/push/light mechanics to the café scene. Replace rectangles with placeholder sprites. (3h).
-- **Day 5:** Add the **Cat Doodle** pickup and platform summon. (3h).
-- **Day 6:** Add Music Box, bridge, and level‑end Memory Stone. (3h).
-- **Day 7:** Add all dialogue triggers (using placeholder text) and test full flow. (3h).
-
-**Checkpoint:** A playable Level 1, start to finish, with placeholder art and text.
-
-### Week 3 (May 28‑Jun 3) – Level 2 & Story
-**Learning focus:** Dialogue manager, transitions, epilogue.  
-**Daily:**
-- **Day 1:** Build `DialogueManager` autoload with dictionary and typewriter effect. (3h).
-- **Day 2:** Integrate dialogue into Level 1; replace placeholders with the real lines. (3h).
-- **Day 3:** Build Level 2 hilltop scene with wind zone (push Her back). (3h).
-- **Day 4:** Add Handwritten Note, storm pedestal, star bridge. (3h).
-- **Day 5:** Build Epilogue scene – hug, final message, photo. (3h).
-- **Day 6:** Chain all scenes with fade transitions. (3h).
-- **Day 7:** Playtest entire game, note any bugs, tweak jump heights and timing.
-
-**Checkpoint:** A complete, playable game with all mechanics, dialogue, and the emotional arc.
-
-### Week 4 (Jun 4‑10) – Art & UI Polish
-**Learning focus:** Pixel art, UI design.  
-**Daily:**
-- **Day 1‑2:** Design and animate both characters (pixel art). (4h).
-- **Day 3:** Draw memory item icons (Cat Doodle, Note) and basic tiles. (3h).
-- **Day 4:** Create backgrounds (café blur, starry night). (2h) + style title screen (1h).
-- **Day 5:** Style all in‑game UI (buttons, dialogue box, heart switch). (3h).
-- **Day 6:** Replace all placeholders with final art. (3h).
-- **Day 7:** Polish transitions, add small visual effects (fireflies, sparkles on item pickup). (3h).
-
-**Checkpoint:** The game now looks like a real, charming product.
-
-### Week 5 (Jun 11‑17) – Audio & Final Testing
-**Learning focus:** Audio integration, bug fixing.  
-**Daily:**
-- **Day 1‑2:** Find background music, cut/loop in Audacity, import. Add SFX. (4h total).
-- **Day 3‑5:** Playtest on your phone exhaustively. Adjust touch controls, fix all collision bugs, puzzle logic holes. (9h).
-- **Day 6:** Add any optional personal touches (whispered audio, photo save feature). (3h).
-- **Day 7:** Ask a friend to test if possible; final adjustments.
-
-**Checkpoint:** The game is fully polished and feels great on mobile.
-
-### Week 6 (Jun 18‑24) – Export & Buffer
-**Daily:**
-- **Day 1‑2:** Configure Android export, create a keystore, export signed APK. (3h). Create a simple game icon. (1h).
-- **Day 3:** Test APK on another Android device if possible. Fix any last‑minute issues. (3h).
-- **Day 4‑6:** Buffer days. Only emergency fixes. Write the personal note to accompany the gift. (3h).
-- **Day 7 (Jun 24):** Final APK stored safely. Back up your project.
-
-### Jun 25‑27 – Relax
-You are done. Happy birthday to her.
+### Character Switching
+- A heart‑shaped `TouchScreenButton` in the top‑left corner. It shows two small portrait icons; the currently active character’s portrait is full color, the inactive one is greyed out.
+- On tap: camera smoothly pans to the other character (using `Camera2D` tween), and input is redirected.
+- While inactive, a character plays a slow "waiting" animation (looking around, softly glowing, etc.).
 
 ---
 
-## 4. Master Checklist (Learning + Development)
+## 💎 4. Memory Items – The Heart of the Puzzles (MVP)
 
-Copy this section into your task manager. Tick them off one by one.
+Only 2 items, each deeply personal.
 
-### Week 1 (May 14‑20)
-- [/] Install Godot 4.x and Android export template
-- [/] Complete "Dodge the Creeps" official tutorial
-- [ ] Understand scenes, nodes, inspector, signals
-- [ ] Set up on‑screen touch buttons (left, right, jump, action)
-- [ ] Create a test character (rectangle) that moves with touch
-- [ ] Test on phone – movement works
-- [ ] Create a second character scene
-- [ ] Implement character switch via heart button
-- [ ] Camera pans to active character on switch
-- [ ] Add pushable block mechanic (rectangle pushes another)
-- [ ] Add breakable wall (rectangle destroys wall on touch)
-- [ ] Add PointLight2D to "Her" and dark/light test area
-- [ ] All mechanics proven with rectangles
+### Item 1: Cat Doodle
+- **Real memory:** A silly cat you drew on a napkin or in a notebook that made her laugh.
+- **In‑game icon:** A simple, cute cat face on a crumpled paper background.
+- **Puzzle function:** Summons a floating cat‑shaped platform that rises upward. Both characters can ride it.
+- **When collected:** Dialogue box with memory text.
+- **Usage:** Stand on a specific glowing spot near the music box, press "Action". The platform appears and slowly floats up for a few seconds.
 
-### Week 2 (May 21‑27)
-- [ ] Learn TileMap basics (terrain, collision)
-- [ ] Build Level 1 café layout with TileMap
-- [ ] Place characters, sack, switch, dark area, alcove
-- [ ] Code push‑sack‑onto‑switch puzzle
-- [ ] Code dim light reveals after switch
-- [ ] Create Cat Doodle pickup item
-- [ ] Implement floating cat platform (summon + ride)
-- [ ] Place Music Box in alcove
-- [ ] Activate Music Box → full light + bridge
-- [ ] Add Memory Stone with collision detection
-- [ ] Add all Level 1 dialogue triggers (start, item found, puzzle solved, end)
-- [ ] Test full Level 1 flow
+### Item 2: Handwritten Note
+- **Real memory:** A letter you wrote her, maybe for a special occasion or just because.
+- **In‑game icon:** A folded paper with a tiny heart seal.
+- **Puzzle function:** Calms the storm. When used on a stone pedestal, the wind zone disappears, clouds clear, and a bridge of stars appears.
+- **When collected:** Dialogue box with inner thought.
+- **Usage:** Carry to the pedestal (marked with a glowing symbol), press "Action". The area transforms.
 
-### Week 3 (May 28‑Jun 3)
-- [ ] Build DialogueManager autoload (dictionary, typewriter effect)
-- [ ] Integrate dialogue into Level 1
-- [ ] Build Level 2 hilltop scene (grass, wind zone, stars)
-- [ ] Implement wind zone (Area2D pushes Her back)
-- [ ] Add cracked rock wall (breakable)
-- [ ] Place Handwritten Note behind wall
-- [ ] Implement storm pedestal – use note → wind stops, star bridge appears
-- [ ] Add Level 2 dialogue triggers
-- [ ] Build Epilogue scene (characters together, hug prompt)
-- [ ] Final message + personal photo display
-- [ ] Link all scenes with fade transitions
-- [ ] Playtest full game – note bugs
-
-### Week 4 (Jun 4‑10)
-- [ ] Learn pixel art tool (Piskel/LibreSprite)
-- [ ] Design "You" character sprite (idle, run, jump frames)
-- [ ] Design "Her" character sprite (idle, run, jump frames)
-- [ ] Draw Cat Doodle item icon
-- [ ] Draw Handwritten Note item icon
-- [ ] Create café tiles (counter, floor, wall)
-- [ ] Create hilltop tiles (grass, rock, tree)
-- [ ] Create background images (café blur, night sky)
-- [ ] Style title screen (locket button, title text)
-- [ ] Style in‑game UI (switch button, jump/action buttons, dialogue box)
-- [ ] Replace all placeholder art with final assets
-- [ ] Add particle effects (fireflies, sparkles on pickup)
-
-### Week 5 (Jun 11‑17)
-- [ ] Find royalty‑free background music loop
-- [ ] Edit music in Audacity (trim, loop, export OGG)
-- [ ] Add background music to main scene
-- [ ] Find/create SFX: item pickup chime, puzzle solved ding, footsteps (optional)
-- [ ] Add SFX triggers in Godot
-- [ ] Record optional whispered "Happy birthday, I love you"
-- [ ] Playtest on phone – adjust touch control size/placement
-- [ ] Fix all collision bugs
-- [ ] Fix puzzle logic bugs
-- [ ] Ensure dialogue doesn't block gameplay incorrectly
-- [ ] Polish jump feel, speeds, gravity
-
-### Week 6 (Jun 18‑24)
-- [ ] Set up Android export preset in Godot
-- [ ] Create debug or release keystore
-- [ ] Export APK
-- [ ] Test APK on a second Android device (if possible)
-- [ ] Create a simple app icon
-- [ ] Final playtest – full game
-- [ ] Write personal note/instructions for her
-- [ ] Backup entire project folder
-- [ ] **Jun 25‑27: Buffer. Relax. Be proud.**
+**No inventory UI** — when an item is picked up, a small icon appears next to the action button. When used, it vanishes.
 
 ---
 
-> You have all the directions. The next step is just to start – even if it's just installing Godot today.  
-> You're building a love letter in the shape of a game. That's already magic.  
-> Good luck. 🎂
+## 🧩 5. Level Design – Step by Step Walkthrough
+
+### Level 1 – The Café (Cozy & Dim)
+
+**Layout (single wide screen):**
+- Left side: Your starting platform, a heavy sack (pushable block), a floor switch.
+- Center: A tall wooden counter acting as a barrier.
+- Right side: Her starting platform (dark, barely visible), a high alcove with a Music Box, and a dark corridor leading to the Memory Stone exit.
+
+**Puzzle Sequence:**
+1. **Start.** Her area is almost pitch black; only her silhouette is visible. Dialogue triggers.
+2. Player (as You) walks right, pushes the sack onto the switch. A dim `PointLight2D` turns on above Her, revealing some platforms but not the path forward.
+3. Switch to Her. She can now move a little. She walks right and picks up the **Cat Doodle** (sparkling item on a table). Dialogue.
+4. She walks to the glowing spot beneath the alcove and uses the item. A floating cat platform rises from that spot, carrying her upward.
+5. At the top, she finds the **Music Box** (an interactable object). Using her `Light Up` ability near it (or simply pressing action) plays a melody, and all lights in the café turn on fully.
+6. Now, with full light, a bridge of warm light extends from Her's side to a central door, and the counter on Your side opens a gap.
+7. Switch to You, walk through the gap, meet Her at the **Memory Stone** (a softly glowing crystal). Touching it triggers the final level dialogue and saves the game.
+
+### Level 2 – The Hilltop (Windy & Starry)
+
+**Layout:**
+- Left side: Your starting area, a cracked rock wall, a storm pedestal.
+- Right side: Her starting area, a winding path that is blocked by a strong wind zone (invisible Area2D that pushes Her back), and a starry bridge that is initially missing.
+- Middle distance: The Memory Stone under a large, bare tree.
+
+**Puzzle Sequence:**
+1. **Start.** Wind howls, Her tries to move right but gets pushed back. Dialogue.
+2. Player (as You) walks left, breaks the cracked wall (just walk into it). Inside a small nook lies the **Handwritten Note**. Pick it up. Dialogue.
+3. Walk right to the storm pedestal (a stone with a glowing blue rune). Use the item there.
+4. The wind immediately ceases, clouds part, and a beautiful bridge of twinkling stars connects Her path to the central tree.
+5. Switch to Her, walk across the star bridge to the Memory Stone.
+6. Switch back to You and walk directly to the same Memory Stone. Both characters arrive. Final level dialogue plays.
+7. Touching the stone triggers the Epilogue transition.
+
+---
+
+## 🗣️ 6. Dialogue System – How It's Built in Godot
+
+**Technical Design:**
+- A `DialogueManager` autoload (singleton) controls all dialogue.
+- It has functions: `show_dialogue(character, text)`, `advance()`, `hide()`.
+- The UI is a `CanvasLayer` with a `Panel` and a `Label`. The label uses your handwritten font.
+- Dialogue data is stored in a dictionary where keys are trigger IDs (e.g., `"level1_start"`) and values are arrays of { `char`, `line` } dicts.
+- Triggers are `Area2D` nodes placed in the level. When the player enters, it calls `DialogueManager.show_dialogue(...)` and pauses movement until the dialogue is dismissed by tapping.
+
+**Example dialogue dictionary:**
+```gdscript
+var dialogues = {
+   "level1_start": [
+      { "char": "Her", "line": "It’s so dark over here... I can't see the way." },
+      { "char": "You", "line": "Hold on. I’ll find something." }
+   ],
+   "level1_found_cat": [
+      { "char": "Her", "line": "This little cat... he drew this the day we laughed until we cried." }
+   ]
+   # ... etc
+}
