@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b6lu8gooodhuu"]
+
+[ext_resource type="Script" uid="uid://cw4p1fv38goai" path="res://scripts/interactable.gd" id="1_56v82"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3aalw"]
+size = Vector2(32, 32)
+
+[node name="Interactable" type="Area2D" unique_id=2140837734]
+script = ExtResource("1_56v82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1229859994]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_3aalw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1502919405]
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 16.0
+mouse_filter = 2
+color = Color(1, 1, 0, 1)
+
+[node name="PromptLabel" type="Label" parent="." unique_id=738570815]
+visible = false
+offset_left = -20.0
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = -37.0
+text = "tap"

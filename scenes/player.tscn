@@ -6,7 +6,7 @@
 radius = 14.0
 height = 40.0
 
-[node name="Player" type="CharacterBody2D" unique_id=837006307]
+[node name="Player" type="CharacterBody2D" unique_id=837006307 groups=["player"]]
 script = ExtResource("1_3vyb7")
 
 [node name="Sprite" type="ColorRect" parent="." unique_id=1874769045]

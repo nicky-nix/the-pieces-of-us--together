@@ -1,15 +1,20 @@
 [gd_scene format=3 uid="uid://bakrvbh782nhs"]
 
 [ext_resource type="PackedScene" uid="uid://2wg17uh1lyo6" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://b6lu8gooodhuu" path="res://scenes/interactable.tscn" id="2_0wfyh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_0wfyh"]
-vertices = PackedVector2Array(98.140625, 274.10938, 70.02344, 299.95313, 32.523438, 56.671875, 68.84375, 70.92969, 152.32813, 232.0625, 173.03125, 531.3281, 168.75, 531.2031, 230.07031, 44.617188, 411.53906, 38.421875, 381.6172, 178.32031, 313.47656, 190.42969, 247.46094, 208.5, 381.14844, 438.5625, 174.50781, 536.8203)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 7, 10, 12), PackedInt32Array(11, 12, 13, 5, 4)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(20, 41, 63, 320, 162, 229, 76, 63), PackedVector2Array(219, 35, 238, 214, 390, 187, 424, 28), PackedVector2Array(266, 242, 80, 226, 168, 551, 393, 444, 321, 180, 111, 232, 74, 224, 163, 548)])
+vertices = PackedVector2Array(445.8828, 43.859375, 437.10938, 781.59375, 51.617188, 805.3828, 24.359375, 38.140625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(14, 28, 456, 34, 447, 791, 42, 816)])
 source_geometry_mode = 2
 
 [node name="Main" type="Node2D" unique_id=889243285]
 y_sort_enabled = true
+
+[node name="Player" parent="." unique_id=837006307 instance=ExtResource("1_o5qli")]
+position = Vector2(220, 346)
+SPEED = 200.0
 
 [node name="Floor" type="ColorRect" parent="." unique_id=1471353988]
 offset_right = 480.0
@@ -17,8 +22,8 @@ offset_bottom = 854.0
 mouse_filter = 2
 color = Color(0.83137256, 0.72156864, 0.5882353, 1)
 
+[node name="Interactable" parent="." unique_id=2140837734 instance=ExtResource("2_0wfyh")]
+position = Vector2(299, 111)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1928511573]
 navigation_polygon = SubResource("NavigationPolygon_0wfyh")
-
-[node name="Player" parent="." unique_id=837006307 instance=ExtResource("1_o5qli")]
-position = Vector2(220, 346)

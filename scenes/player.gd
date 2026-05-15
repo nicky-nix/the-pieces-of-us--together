@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 120.0
+@export var SPEED = 120.0
 
 @onready var agent = $NavigationAgent2D
 @onready var sprite = $Sprite   # your visual node
