@@ -14,11 +14,6 @@ player1 = NodePath("player")
 player2 = NodePath("player2")
 camera_offset = Vector2(0, -150)
 
-[node name="GameCamera" type="Camera2D" parent="." unique_id=428152815]
-limit_enabled = false
-position_smoothing_enabled = true
-rotation_smoothing_enabled = true
-
 [node name="player" parent="." unique_id=1001411109 instance=ExtResource("1_7figs")]
 modulate = Color(0, 0, 1, 1)
 position = Vector2(672, 452)
@@ -35,7 +30,9 @@ position = Vector2(93, 542)
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="UI" unique_id=1974875153]
 modulate = Color(0, 1, 1, 1)
-position = Vector2(512, 40)
+position = Vector2(483, 40)
 scale = Vector2(114.286, 64)
 texture_normal = SubResource("CanvasTexture_7figs")
 texture_pressed = SubResource("CanvasTexture_wmun6")
+
+[node name="GameCamera" type="Camera2D" parent="." unique_id=2072701167]
