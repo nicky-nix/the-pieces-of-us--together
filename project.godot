@@ -11,18 +11,15 @@ config_version=5
 [application]
 
 config/name="The Pieces of Us: Together"
-run/main_scene="uid://cao88c7a2j1jb"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-GameManager="*uid://drjlqg7kprfpr"
-
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=1920
+window/size/viewport_width=480
+window/size/viewport_height=854
+window/size/window_width_override=480
+window/size/window_height_override=854
 window/stretch/mode="canvas_items"
 
 [input]

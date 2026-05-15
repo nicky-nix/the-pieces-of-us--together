@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bakrvbh782nhs"]
+
+[node name="Main" type="Node2D" unique_id=889243285]
+y_sort_enabled = true
+
+[node name="Floor" type="ColorRect" parent="." unique_id=1471353988]
+offset_right = 480.0
+offset_bottom = 854.0
+color = Color(0.83137256, 0.72156864, 0.5882353, 1)
