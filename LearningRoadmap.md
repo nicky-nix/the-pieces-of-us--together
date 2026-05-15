@@ -260,9 +260,9 @@ Design 8 rooms total — 5 clear a "set," then a Memory Stone room appears. Repe
 
 ### Week 1 — Foundation (May 15–21)
 
-- [ ] Install Godot 4.x and Android export template
+- [/] Install Godot 4.x and Android export template
 - [ ] Set viewport to 480×854 portrait in Project Settings
-- [ ] Complete "Dodge the Creeps" tutorial
+- [/] Complete "Dodge the Creeps" tutorial
 - [ ] Build test scene with TileMap floor + CharacterBody2D top-down movement
 - [ ] Enable Y-Sort on main scene node
 - [ ] Set up on-screen touch buttons (D-pad, action, switch)
