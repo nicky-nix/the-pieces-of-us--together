@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="The Pieces of Us: Together"
+run/main_scene="uid://bakrvbh782nhs"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*uid://gag566hngba3"
 
 [display]
 

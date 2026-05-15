@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://2wg17uh1lyo6"]
+
+[ext_resource type="Script" uid="uid://dm8wpilq7csxl" path="res://scenes/player.gd" id="1_3vyb7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
+radius = 14.0
+height = 40.0
+
+[node name="Player" type="CharacterBody2D" unique_id=837006307]
+script = ExtResource("1_3vyb7")
+
+[node name="Sprite" type="ColorRect" parent="." unique_id=1874769045]
+offset_left = -16.0
+offset_top = -48.0
+offset_right = 16.0
+mouse_filter = 2
+color = Color(0.34901962, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1972191169]
+shape = SubResource("CapsuleShape2D_u8vuu")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1699744568]
+position_smoothing_enabled = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=86853928]
