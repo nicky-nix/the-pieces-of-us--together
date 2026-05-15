@@ -1,293 +1,342 @@
-# 🎓 The Pieces of Us · Together — Complete Learning & Development Roadmap
+# The Pieces of Us · Together
 
-*A zero‑to‑MVP guide for building a heartfelt 2D puzzle‑platformer in Godot as an Android APK.  
-Made for her 18th birthday on June 27. No prior experience required.*
+**Complete Learning & Development Roadmap · Roguelike Edition**
 
----
+*A top-down exploration-puzzle roguelike in Godot · Portrait Android APK*
 
-## 1. Overview & Time Budget
+*Made for her 18th birthday · June 27*
 
-- **Total available days:** 44 (May 14 → June 27)
-- **Daily commitment:** ~3 hours (≈ 132 total hours)
-- **End product:** A 10‑15 minute 2‑level game with dual‑character switching, memory‑item puzzles, dialogue, and a personal epilogue.
-- **Core philosophy:** Learn only what you need, build as you learn, ship from the heart.
+**May 15 → June 27 · 43 days · ~129 hours**
 
 ---
 
-## 2. Skill Map & Detailed Breakdown
+## 1. What You Are Building
 
-### 2.1 Godot Engine Fundamentals (8‑10 h)
-You need to be able to create scenes, add nodes, use the inspector, and export an APK.
+This is a top-down exploration-puzzle game with roguelike room generation — viewed from the same angle as Stardew Valley (a 3/4 perspective, portrait orientation on mobile). The player controls two characters who must work together across procedurally arranged rooms. Each run tells a new path through shared memories. There are no enemies — only puzzles, locked doors, and items hidden in hand-crafted rooms that shuffle each time.
 
-| Sub‑skill | What you'll do | Time | Recommended resources |
-|-----------|----------------|------|------------------------|
-| **Interface & Scene System** | Navigate the editor, create 2D scenes, save/run. | 2h | Official docs "Step by Step" + Godot 4 2D tutorial (GDQuest/GameDev.tv) |
-| **Nodes & Scenes** | Understand `Node2D`, `Sprite2D`, `Area2D`, `CollisionShape2D`, `CharacterBody2D`, `Camera2D`, `TileMap`, `PointLight2D`. | 2h | Godot documentation node pages; practice by adding each to a scene. |
-| **Signals & basic connections** | Connect buttons, detect collisions, react to input. | 1.5h | "Dodge the Creeps" tutorial covers signals. |
-| **Input Map & Touch** | Set up on‑screen buttons, map to actions (`ui_left`, `ui_right`, `jump`, `action`). | 1.5h | Godot "Mobile game with touch buttons" tutorials on YouTube. |
-| **Export to APK** | Install Android build template, generate debug APK, test on phone. | 1h | Godot docs "Exporting for Android"; enable USB debugging on your phone. |
-| **Total** | | **8h** | |
+| **Core loop (one run = ~10 minutes)** |
+|----------------------------------------|
+| Enter a room → notice the environment → use items and character abilities to solve a puzzle → unlock the exit → move to the next room. After clearing 5 rooms, a Memory Stone triggers a personal dialogue moment. Clear 3 Memory Stones to reach the Epilogue. |
 
-**Mini‑exercises to lock it in:**
-1. Create a scene with a colored rectangle and a `Camera2D`; make it move left/right with keyboard.
-2. Add a second scene and switch between them using a button.
-3. Build a simple test with on‑screen touch buttons (use `TouchScreenButton` nodes) and run it on your phone.
+| **Engine & Platform** | **Camera & View** |
+|----------------------|-------------------|
+| Godot 4.x → Android APK (portrait, 9:16) | Top-down 3/4 perspective · Stardew-style · Camera2D follows active character |
+| **Total days** | **Scope** |
+| 43 days · ~3h/day · ~129 total hours | 8–12 hand-crafted rooms · procedural shuffle · personal dialogue · epilogue |
 
 ---
 
-### 2.2 GDScript Coding Skills (10‑12 h)
-You don't need to be a programmer – just enough to write simple scripts that control the game.
+## 2. How the Camera & View Works (Stardew Style)
 
-| Sub‑skill | Where it's used | Time | Learning approach |
-|-----------|-----------------|------|-------------------|
-| **Variables, `export`, `@onready`** | Storing player speed, item references. | 1h | Follow along with beginner GDScript series (e.g., "GDScript in 10 minutes"). |
-| **Functions & `_process`/`_physics_process`** | Movement code, checking states each frame. | 1.5h | Write small scripts that print a number every frame, then move a sprite. |
-| **If statements & simple state** | Is this the active character? Is an item held? | 1h | Create a state variable and toggle behavior (e.g., change color on press). |
-| **Vectors & movement (`velocity`, `move_and_slide`)** | Basic platformer physics. | 2h | Copy the `CharacterBody2D` movement template from the official docs; modify it. |
-| **Signals & custom signals** | Trigger dialogue, puzzle solved event. | 1.5h | Define a custom signal `puzzle_solved` and emit it when an `Area2D` is entered. |
-| **Autoloads (singletons)** | `GameManager` and `DialogueManager` global scripts. | 1.5h | Create a singleton that stores a variable; access it from another scene. |
-| **Tween basics (`create_tween()`)** | Camera pan, UI fade, island animations. | 1h | Animate a sprite's position or modulate with one line of code. |
-| **Collision layers & masks** | Who can push, who can break. | 1h | Set up layers and use `move_and_collide` to detect pushable objects. |
-| **Total** | | **10h** | |
+Stardew Valley uses an orthographic top-down 3/4 camera: the world is viewed slightly from above, characters face in 4 directions, and tiles are drawn slightly wider than tall to give depth. In Godot you recreate this with:
 
-**Mini‑exercises:**
-1. Make a ball that bounces using `move_and_slide()`.
-2. Create a `Coin` scene with an `Area2D` that prints "collected" when entered.
-3. Build an autoload that keeps a score, then display it on a label.
+- TileMap with 16×16 or 32×32 tiles — stretched slightly (e.g. 16×12) to fake the 3/4 angle
+- CharacterBody2D with 8-direction sprite sheets — down, up, left, right — 3-4 frames each
+- Camera2D on the active character — smooth following, clamped to room bounds
+- Portrait viewport — 480×854 or 540×960 — set in Project Settings under Display → Window
+- Y-sort enabled on your main scene — this makes characters appear "behind" objects lower on screen — gives depth
+
+> **Y-Sort is the secret ingredient**  
+> In Godot 4, add a Node2D with "Y Sort Enabled" checked as the parent of all world objects. Items and characters lower on screen (higher Y value) draw on top — which is what makes top-down games look 3D. Enable it early and never remove it.
 
 ---
 
-### 2.3 2D Platformer & Character Switching (5‑6 h)
-These are the specific gameplay mechanics of your game.
+## 3. Skill Map & Time Budget
 
-| Sub‑skill | Implementation detail | Time | Tips |
-|-----------|-----------------------|------|------|
-| **CharacterBody2D movement with touch** | Left/right, jump, apply gravity, handle `Input.get_action_strength()`. | 1h | Use the template from the official "2D movement" docs; bind touch buttons. |
-| **Switching between two players** | Two `CharacterBody2D` scenes; a global variable tracks `active_player`; `_input` only works for the active one. | 2h | Create a heart button that toggles a string `"you"` / `"her"`, and each player script checks if it's active. |
-| **Pushable block** | A separate `CharacterBody2D` that moves when the player collides with it while holding a direction. | 1.5h | Use `move_and_collide` on the block; apply a velocity based on the player's direction. |
-| **Breakable wall** | A `StaticBody2D` with an `Area2D` child; when the player with the "You" tag enters, queue_free(). | 1h | Use collision masks so only "You" can trigger it. |
-| **PointLight2D / darkness** | Hide a tilemap layer until a light source reveals it; or use a light mask. | 1.5h | Create a `PointLight2D` on the "Her" scene; set the tilemap's `light_mask` so it's only visible when illuminated. |
-| **Total** | | **6h** | |
+*Learn only what you need. Build as you learn. Every skill below is directly used in the game.*
 
-**Mini‑exercises:**
-1. Prototype the switch mechanic with two colored rectangles – tap the heart to control the other.
-2. Make a crate that can be pushed and stops at walls.
-3. Add a simple dark room: everything is black until the light character walks near, then a circle reveals platforms.
+### 3.1 Godot Fundamentals (8–10 h)
 
----
+| Sub-skill | What you build / do | Time | How to learn |
+|-----------|---------------------|------|---------------|
+| Interface & Scene system | Navigate editor, create 2D scenes, save and run | 2h | Godot docs "Step by Step" + GDQuest intro |
+| Nodes & Scenes | TileMap, CharacterBody2D, Camera2D, Area2D, CollisionShape2D, YSort | 2h | Official node docs — add each to a test scene |
+| Signals & connections | Detect area overlaps, button presses, room transitions | 1.5h | "Dodge the Creeps" tutorial covers signals well |
+| Touch input map | On-screen D-pad, action button, character switch button | 1.5h | TouchScreenButton nodes — YouTube "Godot mobile touch" |
+| Export to APK | Android template, debug APK, USB test on phone | 1h | Godot docs "Exporting for Android" |
 
-### 2.4 UI & Dialogue System (6‑8 h)
-You need a dialogue box, an inventory indicator, a pause menu, and a title screen.
+### 3.2 GDScript Essentials (10–12 h)
 
-| Sub‑skill | What it does | Time | How to learn |
-|-----------|--------------|------|---------------|
-| **Control nodes basics** | `Panel`, `Label`, `TextureButton`, `MarginContainer`. | 1.5h | Build a simple title screen with a start button that changes scene. |
-| **TouchScreenButton & anchors** | Position buttons for mobile, use anchors and margins. | 1h | Experiment with `Control` layout options; test on different screen sizes in the editor. |
-| **Dialogue manager autoload** | Store lines in a dictionary, display them character‑by‑character, wait for tap to advance. | 3h | Create a `DialogueManager` singleton with functions `show_dialogue(trigger_id)` and `advance()`. Use a `Timer` to reveal text slowly. |
-| **CanvasLayer** | Keep HUD and dialogue on top of the game world. | 0.5h | Attach all UI to a `CanvasLayer` node. |
-| **Scene transitions** | Fade to black between levels. | 0.5h | Use a `ColorRect` and `create_tween()` to animate its `modulate.a`. |
-| **Total** | | **6h** | |
+| Sub-skill | What you build / do | Time | How to learn |
+|-----------|---------------------|------|---------------|
+| Variables, @export, @onready | Player speed, current room ref, item held | 1h | GDScript beginner series (GDQuest) |
+| Functions & _process/_physics_process | Movement each frame, state checks | 1.5h | Write a script that moves a sprite with arrow keys |
+| If statements & state machines | Active character, item held, door locked/unlocked | 1h | Toggle a variable; change sprite color on press |
+| Vectors, velocity, move_and_slide | Top-down 8-direction movement | 2h | Copy the 2D movement template from Godot docs |
+| Custom signals | puzzle_solved, memory_collected, room_cleared | 1.5h | Define and emit a signal from Area2D |
+| Autoloads / Singletons | GameManager (run state), DialogueManager | 1.5h | Create a singleton that stores which rooms are cleared |
+| Tween & create_tween() | Door open animation, UI fade, item float | 1h | Animate a sprite's position with one tween call |
+| Collision layers & masks | Which character triggers which object | 1h | Layer 1 = world, Layer 2 = You, Layer 3 = Her |
 
-**Mini‑exercises:**
-1. Create a text box that shows "Hello" when you enter an `Area2D` and hides when you leave.
-2. Make a dialogue system where tapping advances through multiple lines stored in an array.
-3. Build a simple pause overlay that stops the game.
+### 3.3 Top-Down Movement & Character Switching (5–6 h)
 
----
+| Sub-skill | What you build / do | Time | How to learn |
+|-----------|---------------------|------|---------------|
+| 8-direction movement | WASD / D-pad, normalize diagonal, set gravity=off | 1h | Use CharacterBody2D + move_and_slide(); no gravity needed |
+| Character switching | Heart button toggles active_player in GameManager; camera jumps | 2h | Two CharacterBody2D scenes; only the active one reads input |
+| Pushable objects | Crates, switches — push by walking into them | 1h | StaticBody2D with MoveAndSlide on contact |
+| Interactable objects | Press action button near item → pick up or trigger | 1.5h | Area2D "is_overlapping" + input action check |
+| Room-bound camera | Camera2D clamped to current room rect; smooth pan on switch | 0.5h | Set camera limit_left/right/top/bottom in code |
 
-### 2.5 Pixel Art & Simple Animation (6‑10 h)
-A charming, minimal style works – you don't need to be an artist.
+### 3.4 Roguelike Room System (8–10 h)
 
-| Sub‑skill | Tools / Approach | Time | Resources |
-|-----------|------------------|------|-----------|
-| **Pixel art editor basics** | Aseprite (paid) / LibreSprite (free) / Piskel (browser). Learn canvas, layers, onion skin. | 1h | YouTube: "Pixel art for beginners" (Brandon James Greer, AdamCYounis). |
-| **Designing a tiny character (32×48)** | Silhouette, limited palette (3‑5 colors), simple features. | 2h | Study "chibi pixel art" references; sketch with basic shapes. |
-| **Idle animation (3 frames)** | Slight up‑down bob, maybe a blink. | 1h | Duplicate frame, move a few pixels, toggle onion skin. |
-| **Run animation (2‑4 frames)** | Simple leg movement, one step per frame. | 1.5h | Keep it super simple; even a sliding motion with a bounce can work. |
-| **Tileset creation** | Ground, wall, counter tiles – 16×16 or 32×32 that repeat. | 2h | Use a grid; draw a few variations for dirt, wood, bricks. |
-| **Backgrounds** | Soft gradient or starry sky (non‑pixel). | 1h | Can be done in any program (even Canva or a photo blurred). |
-| **Total** | | **8h** | |
+| Sub-skill | What you build / do | Time | How to learn |
+|-----------|---------------------|------|---------------|
+| Hand-crafted room scenes | 8–12 individual room .tscn files — each a self-contained puzzle | 3h | Design each room as a scene; export variables for door positions |
+| Room graph / shuffle | Array of room paths shuffled with randomize(); pick 5 per run | 2h | rooms.shuffle() in GameManager; store current_room_index |
+| Room loader / transition | load() or preload() a room scene; instance it; free old room | 2h | Use a RoomManager autoload that swaps scenes smoothly |
+| Door & exit triggers | Area2D at room edge; when entered, load next room | 1.5h | Emit room_exit signal → RoomManager.go_to_next_room() |
+| Run state persistence | Track items collected, memory stones found across rooms | 1.5h | Dictionary in GameManager — survives room transitions |
 
-**Shortcuts:**  
-- If drawing is too hard, use Kenney's free 1‑bit or platformer packs and recolor them.  
-- For animation, 2‑frame "bobbing" is fine – nobody expects smooth 60fps sprites from a handmade gift.
+### 3.5 Puzzle Mechanics (6–8 h)
 
----
+| Sub-skill | What you build / do | Time | How to learn |
+|-----------|---------------------|------|---------------|
+| Key + locked door | Collect key item → door Area2D checks if player holds key → door.open() | 1.5h | GameManager.has_item("key") check |
+| Pressure switch | Push crate onto Area2D switch → emit signal → unlock door | 1.5h | Area2D body_entered checks if body is in "pushable" group |
+| Light puzzle (Her ability) | Her character emits PointLight2D; hidden tiles visible only in light | 2h | Set TileMap light_mask; PointLight2D on Her scene |
+| Symbol match | Interact with two matching objects in correct order → open path | 1.5h | Array tracks interaction order; compare to solution array |
+| Memory item pickup | Collect special item → trigger dialogue → record in run state | 1h | Area2D + is_held check + DialogueManager.show() |
 
-### 2.6 Audio Sourcing & Editing (3‑4 h)
-No composing required – just find free music and cut it.
+### 3.6 UI & Dialogue System (5–6 h)
 
-| Sub‑skill | What you'll do | Time | Places to search |
-|-----------|----------------|------|------------------|
-| **Finding royalty‑free music** | One soft, looping instrumental. | 1h | Pixabay Music, Incompetech, FreeSound. Keywords: "soft ukulele lullaby", "calm piano loop". |
-| **Basic audio editing (Audacity)** | Trim, loop, adjust volume, export as OGG. | 1.5h | Install Audacity (free); YouTube "Audacity loop music" tutorial. |
-| **Adding audio to Godot** | `AudioStreamPlayer` nodes, trigger on item pickup. | 1h | Godot docs: "Audio Streams". |
-| **Total** | | **3.5h** | |
+| Sub-skill | What you build / do | Time | How to learn |
+|-----------|---------------------|------|---------------|
+| Control nodes & CanvasLayer | HUD, dialogue box, inventory indicator always on top | 1h | Put all UI under a CanvasLayer node |
+| Portrait touch buttons | D-pad bottom left, action + switch bottom right, anchored | 1h | Use TouchScreenButton; anchor to bottom corners |
+| Dialogue manager | Dictionary of lines; typewriter reveal; tap to advance | 2.5h | DialogueManager.show(trigger_id) → typewriter Timer autoload |
+| Pause & memory gallery | Button opens overlay listing collected memory items | 1h | get_tree().paused = true; show CanvasLayer overlay |
+| Scene fade transitions | Fade to black on room exit; fade in on room enter | 0.5h | ColorRect modulate.a via Tween |
 
-**Mini‑exercise:**  
-1. Find a loop, trim it to a perfect loop in Audacity, put it in Godot and make it play when the game starts.
+### 3.7 Pixel Art & Animation — Top-Down Style (8–10 h)
 
----
+| Sub-skill | What you build / do | Time | How to learn |
+|-----------|---------------------|------|---------------|
+| Pixel art editor basics | Aseprite / LibreSprite / Piskel — canvas, layers, palette | 1h | YouTube: Brandon James Greer "pixel art for beginners" |
+| Top-down character (32×32) | 4 directions · silhouette first · 3–5 colour palette | 2.5h | Draw a top oval for head, smaller oval for body; add hair |
+| Walk animation (4 dirs × 3 frames) | Step left foot, neutral, step right foot — per direction | 2.5h | Aseprite Tags: down_walk, up_walk, left_walk, right_walk |
+| Environment tiles (16×16) | Floor, wall, door, chest, pressure plate, rug, window | 2h | Use a grid; draw wall tops slightly lighter for 3/4 feel |
+| Item & object sprites | Memory items, keys, switches, crates — small (16×16) | 1h | Simple shapes; recognisable silhouette matters most |
+| Backgrounds | Room background (dark stone, warm café, hilltop grass) | 1h | Solid tile fill + a darker border tile for walls |
 
-## 3. Integrated Week‑by‑Week Learning & Building Plan
+### 3.8 Audio (3–4 h)
 
-### Week 1 (May 14‑20) – Foundation
-**Learning focus:** Godot basics, touch movement, character switching prototype.  
-**Daily breakdown:**
-- **Day 1‑2:** Complete "Dodge the Creeps" tutorial (3h). Get comfortable with editor, scenes, signals.
-- **Day 3:** Build a test scene with a rectangle that moves with touch buttons. Test on phone (3h).
-- **Day 4:** Add a second rectangle. Create a heart button that switches control between them (3h).
-- **Day 5:** Implement pushable block and breakable wall on rectangles (3h).
-- **Day 6:** Add a `PointLight2D` to the "Her" rectangle; make dark tiles appear when illuminated (3h).
-- **Day 7:** Rest, review all code, fix any bugs, test on phone again.
-
-**Checkpoint:** You have two colored rectangles that can switch, push, break, and light up. The tech is proven.
-
-### Week 2 (May 21‑27) – Level 1
-**Learning focus:** Tilemaps, puzzle logic, trigger dialogue.  
-**Daily:**
-- **Day 1‑2:** Learn `TileMap` basics, draw a simple café layout (counter, floor). (2h learning + 1h building).
-- **Day 3‑4:** Transfer switch/push/light mechanics to the café scene. Replace rectangles with placeholder sprites. (3h).
-- **Day 5:** Add the **Cat Doodle** pickup and platform summon. (3h).
-- **Day 6:** Add Music Box, bridge, and level‑end Memory Stone. (3h).
-- **Day 7:** Add all dialogue triggers (using placeholder text) and test full flow. (3h).
-
-**Checkpoint:** A playable Level 1, start to finish, with placeholder art and text.
-
-### Week 3 (May 28‑Jun 3) – Level 2 & Story
-**Learning focus:** Dialogue manager, transitions, epilogue.  
-**Daily:**
-- **Day 1:** Build `DialogueManager` autoload with dictionary and typewriter effect. (3h).
-- **Day 2:** Integrate dialogue into Level 1; replace placeholders with the real lines. (3h).
-- **Day 3:** Build Level 2 hilltop scene with wind zone (push Her back). (3h).
-- **Day 4:** Add Handwritten Note, storm pedestal, star bridge. (3h).
-- **Day 5:** Build Epilogue scene – hug, final message, photo. (3h).
-- **Day 6:** Chain all scenes with fade transitions. (3h).
-- **Day 7:** Playtest entire game, note any bugs, tweak jump heights and timing.
-
-**Checkpoint:** A complete, playable game with all mechanics, dialogue, and the emotional arc.
-
-### Week 4 (Jun 4‑10) – Art & UI Polish
-**Learning focus:** Pixel art, UI design.  
-**Daily:**
-- **Day 1‑2:** Design and animate both characters (pixel art). (4h).
-- **Day 3:** Draw memory item icons (Cat Doodle, Note) and basic tiles. (3h).
-- **Day 4:** Create backgrounds (café blur, starry night). (2h) + style title screen (1h).
-- **Day 5:** Style all in‑game UI (buttons, dialogue box, heart switch). (3h).
-- **Day 6:** Replace all placeholders with final art. (3h).
-- **Day 7:** Polish transitions, add small visual effects (fireflies, sparkles on item pickup). (3h).
-
-**Checkpoint:** The game now looks like a real, charming product.
-
-### Week 5 (Jun 11‑17) – Audio & Final Testing
-**Learning focus:** Audio integration, bug fixing.  
-**Daily:**
-- **Day 1‑2:** Find background music, cut/loop in Audacity, import. Add SFX. (4h total).
-- **Day 3‑5:** Playtest on your phone exhaustively. Adjust touch controls, fix all collision bugs, puzzle logic holes. (9h).
-- **Day 6:** Add any optional personal touches (whispered audio, photo save feature). (3h).
-- **Day 7:** Ask a friend to test if possible; final adjustments.
-
-**Checkpoint:** The game is fully polished and feels great on mobile.
-
-### Week 6 (Jun 18‑24) – Export & Buffer
-**Daily:**
-- **Day 1‑2:** Configure Android export, create a keystore, export signed APK. (3h). Create a simple game icon. (1h).
-- **Day 3:** Test APK on another Android device if possible. Fix any last‑minute issues. (3h).
-- **Day 4‑6:** Buffer days. Only emergency fixes. Write the personal note to accompany the gift. (3h).
-- **Day 7 (Jun 24):** Final APK stored safely. Back up your project.
-
-### Jun 25‑27 – Relax
-You are done. Happy birthday to her.
+| Sub-skill | What you build / do | Time | How to learn |
+|-----------|---------------------|------|---------------|
+| Find royalty-free music | 1 soft looping track; maybe 1 warmer track for memory moments | 1h | Pixabay Music, Incompetech — search "calm lo-fi loop" |
+| Edit in Audacity | Trim to clean loop point; export as .ogg | 1h | YouTube: "Audacity perfect loop" tutorial |
+| Godot AudioStreamPlayer | Background music; SFX on item pickup, door open, room clear | 1h | AudioStreamPlayer (music) + AudioStreamPlayer2D (SFX) |
+| Optional personal touch | Whispered "happy birthday, I love you" on epilogue screen | 0.5h | Record with phone mic; import as .ogg; trigger on epilogue |
 
 ---
 
-## 4. Master Checklist (Learning + Development)
+## 4. Week-by-Week Plan
 
-Copy this section into your task manager. Tick them off one by one.
+*43 days · ~3 hours per day · May 15 → June 27*
 
-### Week 1 (May 14‑20)
-- [/] Install Godot 4.x and Android export template
-- [/] Complete "Dodge the Creeps" official tutorial
-- [/] Understand scenes, nodes, inspector, signals
-- [ ] Set up on‑screen touch buttons (left, right, jump, action)
-- [/] Create a test character (rectangle) that moves with touch
-- [ ] Test on phone – movement works
-- [/] Create a second character scene
-- [/] Implement character switch via heart button
-- [/] Camera pans to active character on switch
-- [ ] Add pushable block mechanic (rectangle pushes another)
-- [ ] Add breakable wall (rectangle destroys wall on touch)
-- [ ] Add PointLight2D to "Her" and dark/light test area
-- [ ] All mechanics proven with rectangles
+### Week 1 (May 15–21)  
+**🎯 Theme: Foundation**
 
-### Week 2 (May 21‑27)
-- [ ] Learn TileMap basics (terrain, collision)
-- [ ] Build Level 1 café layout with TileMap
-- [ ] Place characters, sack, switch, dark area, alcove
-- [ ] Code push‑sack‑onto‑switch puzzle
-- [ ] Code dim light reveals after switch
-- [ ] Create Cat Doodle pickup item
-- [ ] Implement floating cat platform (summon + ride)
-- [ ] Place Music Box in alcove
-- [ ] Activate Music Box → full light + bridge
-- [ ] Add Memory Stone with collision detection
-- [ ] Add all Level 1 dialogue triggers (start, item found, puzzle solved, end)
-- [ ] Test full Level 1 flow
+*Learning focus: Godot basics · portrait setup · top-down movement · character switch*
 
-### Week 3 (May 28‑Jun 3)
-- [ ] Build DialogueManager autoload (dictionary, typewriter effect)
-- [ ] Integrate dialogue into Level 1
-- [ ] Build Level 2 hilltop scene (grass, wind zone, stars)
-- [ ] Implement wind zone (Area2D pushes Her back)
-- [ ] Add cracked rock wall (breakable)
-- [ ] Place Handwritten Note behind wall
-- [ ] Implement storm pedestal – use note → wind stops, star bridge appears
-- [ ] Add Level 2 dialogue triggers
-- [ ] Build Epilogue scene (characters together, hug prompt)
-- [ ] Final message + personal photo display
+- **Day 1–2:** Install Godot 4. Set viewport to 480×854 (portrait). Complete "Dodge the Creeps" for signals & nodes. (3h)
+- **Day 3:** Build a test room: TileMap floor, a CharacterBody2D that moves in 8 directions. Enable Y-Sort. Test on phone. (3h)
+- **Day 4:** Add a second character scene. Create a switch button that toggles active_player. Camera follows the active one. (3h)
+- **Day 5:** Add a pushable crate and a pressure switch (crate on switch → "door" disappears). (3h)
+- **Day 6:** Add PointLight2D to "Her" character. Create a dark room where hidden tiles only appear in her light. (3h)
+- **Day 7:** Review all code. Test on phone. Fix movement feel — adjust speed, diagonals. Rest.
+
+**✦ Checkpoint:** Two rectangles can switch, push, and light up. The core tech is proven in portrait.
+
+---
+
+### Week 2 (May 22–28)  
+**🎯 Theme: Room System**
+
+*Learning focus: Hand-crafted rooms · room loader · roguelike shuffle · door transitions*
+
+- **Day 1–2:** Design 3 room scenes using TileMap (floor + walls). Add exit Area2D triggers at edges. (3h each)
+- **Day 3:** Build RoomManager autoload: array of room paths, shuffle on run start, load next room on exit. (3h)
+- **Day 4:** Add fade transition between rooms. Preserve GameManager run state across loads. (3h)
+- **Day 5:** Design 3 more rooms. Total: 6 rooms, all loadable in random order. Test a full 6-room run. (3h)
+- **Day 6:** Add a key + locked door puzzle to one room. Add a crate + pressure switch to another. (3h)
+- **Day 7:** Playtest the full shuffle loop. Note any loading bugs. Rest.
+
+**✦ Checkpoint:** A shuffled 6-room run playable from start to finish with two working puzzle types.
+
+---
+
+### Week 3 (May 29–Jun 4)  
+**🎯 Theme: Story & Puzzles**
+
+*Learning focus: DialogueManager · Memory Stones · all puzzle types · epilogue scene*
+
+- **Day 1:** Build DialogueManager autoload: dictionary of lines, typewriter reveal, tap to advance. (3h)
+- **Day 2:** Add Memory Stone to every 5th room. Trigger personal dialogue on touch. (3h)
+- **Day 3:** Write all dialogue lines — room intros, item finds, Memory Stone moments, epilogue. (3h)
+- **Day 4:** Add light puzzle room (Her only), symbol match room. Now 8 total rooms. (3h)
+- **Day 5:** Build Epilogue scene: 3 Memory Stones collected → final room → characters unite → personal message. (3h)
+- **Day 6:** Add memory item pickup in 2 rooms (special collectibles that appear in gallery). (3h)
+- **Day 7:** Playtest full game with all dialogue. Note pacing issues. Rest.
+
+**✦ Checkpoint:** Complete playable game with story, all puzzle types, and epilogue.
+
+---
+
+### Week 4 (Jun 5–11)  
+**🎯 Theme: Art & Visuals**
+
+*Learning focus: Top-down character sprites · tiles · backgrounds · UI polish*
+
+- **Day 1–2:** Draw "You" character: 4-direction walk animation (32×32, 3 frames each). (4h)
+- **Day 3:** Draw "Her" character: same structure, different palette, hair, PointLight2D glow. (3h)
+- **Day 4:** Create tileset: floor, wall, wall-top, door open/closed, pressure switch, crate. (3h)
+- **Day 5:** Draw memory item icons and collectible sprites. Style dialogue box and HUD buttons. (3h)
+- **Day 6:** Create backgrounds for 3 room types (stone dungeon, warm café room, hilltop). (3h)
+- **Day 7:** Replace all placeholder rectangles with final art. Add sparkle particle on item pickup. (3h)
+
+**✦ Checkpoint:** The game looks like a real charming product — no more colored rectangles.
+
+---
+
+### Week 5 (Jun 12–18)  
+**🎯 Theme: Audio & Testing**
+
+*Learning focus: Music · SFX · bug fixing · touch control polish*
+
+- **Day 1–2:** Find 2 music tracks, loop them in Audacity, import as .ogg. Add to game + memory moment track. (4h)
+- **Day 3:** Add SFX: item pickup chime, door open, puzzle solved ding, room clear jingle. (3h)
+- **Day 4–5:** Deep playtest on phone: fix touch button size, fix collision bugs, test room shuffle edge cases. (6h)
+- **Day 6:** Optional: record whispered birthday message for epilogue. Polish epilogue screen. (3h)
+- **Day 7:** Ask someone to test if possible. Final sound balance pass. Rest.
+
+**✦ Checkpoint:** Game is fully polished, feels great on mobile, all bugs squashed.
+
+---
+
+### Week 6 (Jun 19–24)  
+**🎯 Theme: Export & Buffer**
+
+*Learning focus: APK export · keystore · icon · personal note · backup*
+
+- **Day 1–2:** Set up Android export preset, create a keystore, export debug APK, test on second device. (3h)
+- **Day 3:** Create app icon (512×512 pixel art, heart / puzzle piece motif). Final APK test. (2h)
+- **Day 4–6:** Buffer. Emergency fixes only. Write her a personal note explaining how to install and play. (3h)
+- **Day 7:** Final APK saved safely. Project backed up to Google Drive or USB. Done.
+
+**✦ Checkpoint:** APK in hand. Backed up. Ready to give.
+
+---
+
+### Jun 25–27
+
+You are done. Rest. Be proud. Happy birthday to her.
+
+---
+
+## 5. Room Design Reference
+
+Design 8 rooms total — 5 clear a "set," then a Memory Stone room appears. Repeat twice, then the Epilogue. Each room should be solvable in 1–3 minutes.
+
+| # | Room type | Puzzle mechanic | Personal memory theme |
+|---|-----------|----------------|------------------------|
+| 1 | Café room | Push crate onto switch → unlock back door | Where you first talked — the corner table |
+| 2 | Dark alcove | Her light reveals a hidden path | A night you stayed up together watching nothing |
+| 3 | Library stacks | Key behind locked shelf — find key in pile | You lending her a book she still has |
+| 4 | Hilltop (outdoor) | Symbol match — two lanterns to light in order | A walk with no destination |
+| ★ | **Memory Stone 1** | **Touch stone → personal dialogue (3–4 lines)** | **"The first time I realised..."** |
+| 5 | Rainy room | Crate + switch + light combo | A day she was sad and you just stayed |
+| 6 | Garden path | Collect 3 flowers in order — colour puzzle | Something small you always notice about her |
+| 7 | Locked attic | Push 2 crates, light hidden symbol, use key | A secret she told you |
+| ★ | **Memory Stone 2** | **Touch stone → personal dialogue** | **"The moment I knew..."** |
+| 8 | Starfield room | Navigate light path — only Her can see route | A wish you have for her future |
+| ★ | **Memory Stone 3** | **Touch stone → Epilogue trigger** | **"Happy birthday..."** |
+
+---
+
+## 6. Master Checklist
+
+*Copy this into Notion, Google Keep, or print it. Tick off one item at a time.*
+
+### Week 1 — Foundation (May 15–21)
+
+- [ ] Install Godot 4.x and Android export template
+- [ ] Set viewport to 480×854 portrait in Project Settings
+- [ ] Complete "Dodge the Creeps" tutorial
+- [ ] Build test scene with TileMap floor + CharacterBody2D top-down movement
+- [ ] Enable Y-Sort on main scene node
+- [ ] Set up on-screen touch buttons (D-pad, action, switch)
+- [ ] Test movement on phone
+- [ ] Create second character scene (Her)
+- [ ] Implement character switch via heart button (GameManager.active_player)
+- [ ] Camera2D follows active character, smooth pan
+- [ ] Pushable crate + pressure switch prototype
+- [ ] PointLight2D on Her — dark tile reveal prototype
+
+### Week 2 — Room System (May 22–28)
+
+- [ ] Design 3 room .tscn files with TileMap + exit Area2D
+- [ ] Build RoomManager autoload with shuffled room array
+- [ ] Implement room loading (load + instance + free old)
+- [ ] Add fade transition between rooms
+- [ ] GameManager persists run state across room transitions
+- [ ] Design 3 more rooms (6 total)
+- [ ] Add key + locked door puzzle to 1 room
+- [ ] Add crate + pressure switch puzzle to 1 room
+- [ ] Playtest full 6-room shuffled run end-to-end
+
+### Week 3 — Story & Puzzles (May 29–Jun 4)
+
+- [ ] Build DialogueManager autoload (dictionary, typewriter, tap to advance)
+- [ ] Add Memory Stone to every 5th room — triggers dialogue
+- [ ] Write all dialogue lines (room intros, items, memory stones, epilogue)
+- [ ] Add light puzzle room (Her light only)
+- [ ] Add symbol match room
+- [ ] Total rooms: 8 (plus 3 Memory Stone rooms)
+- [ ] Build Epilogue scene (characters meet, final message, personal photo)
+- [ ] Add memory item collectibles (2 rooms)
 - [ ] Link all scenes with fade transitions
-- [ ] Playtest full game – note bugs
+- [ ] Playtest full game — note any pacing issues
 
-### Week 4 (Jun 4‑10)
-- [ ] Learn pixel art tool (Piskel/LibreSprite)
-- [ ] Design "You" character sprite (idle, run, jump frames)
-- [ ] Design "Her" character sprite (idle, run, jump frames)
-- [ ] Draw Cat Doodle item icon
-- [ ] Draw Handwritten Note item icon
-- [ ] Create café tiles (counter, floor, wall)
-- [ ] Create hilltop tiles (grass, rock, tree)
-- [ ] Create background images (café blur, night sky)
-- [ ] Style title screen (locket button, title text)
-- [ ] Style in‑game UI (switch button, jump/action buttons, dialogue box)
+### Week 4 — Art & Visuals (Jun 5–11)
+
+- [ ] Design "You" sprite: 4-direction walk (32×32, 3 frames each)
+- [ ] Design "Her" sprite: same structure, different palette + light glow
+- [ ] Create tileset: floor, wall, wall-top, door, switch, crate
+- [ ] Draw memory item icons and pickup sprites
+- [ ] Style dialogue box, HUD buttons, memory gallery overlay
+- [ ] Create backgrounds for 3 room environments
 - [ ] Replace all placeholder art with final assets
-- [ ] Add particle effects (fireflies, sparkles on pickup)
+- [ ] Add particle effect on item pickup
+- [ ] Title screen — game name, start button, portrait layout
 
-### Week 5 (Jun 11‑17)
-- [ ] Find royalty‑free background music loop
-- [ ] Edit music in Audacity (trim, loop, export OGG)
-- [ ] Add background music to main scene
-- [ ] Find/create SFX: item pickup chime, puzzle solved ding, footsteps (optional)
-- [ ] Add SFX triggers in Godot
-- [ ] Record optional whispered "Happy birthday, I love you"
-- [ ] Playtest on phone – adjust touch control size/placement
+### Week 5 — Audio & Testing (Jun 12–18)
+
+- [ ] Find 2 royalty-free music tracks (main loop + memory/epilogue)
+- [ ] Edit and loop both tracks in Audacity, export as .ogg
+- [ ] Add music to Godot with AudioStreamPlayer
+- [ ] SFX: item pickup chime, door open, puzzle solved, room clear
+- [ ] Optional: record whispered birthday message for epilogue
+- [ ] Deep playtest on phone — adjust touch button size and placement
 - [ ] Fix all collision bugs
-- [ ] Fix puzzle logic bugs
-- [ ] Ensure dialogue doesn't block gameplay incorrectly
-- [ ] Polish jump feel, speeds, gravity
+- [ ] Fix any room shuffle edge cases
+- [ ] Ensure dialogue never blocks gameplay
+- [ ] Polish jump feel and movement speed
 
-### Week 6 (Jun 18‑24)
+### Week 6 — Export & Buffer (Jun 19–24)
+
 - [ ] Set up Android export preset in Godot
 - [ ] Create debug or release keystore
-- [ ] Export APK
-- [ ] Test APK on a second Android device (if possible)
-- [ ] Create a simple app icon
-- [ ] Final playtest – full game
-- [ ] Write personal note/instructions for her
-- [ ] Backup entire project folder
-- [ ] **Jun 25‑27: Buffer. Relax. Be proud.**
+- [ ] Export signed APK
+- [ ] Test APK on a second Android device
+- [ ] Create 512×512 app icon
+- [ ] Final full playtest on phone
+- [ ] Write personal note / install instructions for her
+- [ ] Back up entire project folder (Google Drive or USB)
 
 ---
 
-> You have all the directions. The next step is just to start – even if it's just installing Godot today.  
-> You're building a love letter in the shape of a game. That's already magic.  
-> Good luck. 🎂
+**Jun 25–27: Buffer. Relax. Be proud.**
+
+You built a love letter in the shape of a game. That's already magic.  
+Happy birthday to her.
