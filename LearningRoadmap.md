@@ -208,13 +208,13 @@ Copy this section into your task manager. Tick them off one by one.
 ### Week 1 (May 14‑20)
 - [/] Install Godot 4.x and Android export template
 - [/] Complete "Dodge the Creeps" official tutorial
-- [ ] Understand scenes, nodes, inspector, signals
+- [/] Understand scenes, nodes, inspector, signals
 - [ ] Set up on‑screen touch buttons (left, right, jump, action)
-- [ ] Create a test character (rectangle) that moves with touch
+- [/] Create a test character (rectangle) that moves with touch
 - [ ] Test on phone – movement works
-- [ ] Create a second character scene
-- [ ] Implement character switch via heart button
-- [ ] Camera pans to active character on switch
+- [/] Create a second character scene
+- [/] Implement character switch via heart button
+- [/] Camera pans to active character on switch
 - [ ] Add pushable block mechanic (rectangle pushes another)
 - [ ] Add breakable wall (rectangle destroys wall on touch)
 - [ ] Add PointLight2D to "Her" and dark/light test area
