@@ -347,13 +347,13 @@ Design 8 rooms total — every 5 clears a Memory Stone appears. Repeat twice, th
 
 ### Week 1 — Foundation (May 15–21)
 - [x] Install Godot 4.x and Android export template
-- [ ] Set viewport to 480×854 portrait in Project Settings
+- [x] Set viewport to 480×854 portrait in Project Settings
 - [x] Complete "Dodge the Creeps" tutorial
-- [ ] Build test room: TileMap floor + NavigationRegion2D (baked)
-- [ ] Add NavigationAgent2D to CharacterBody2D — tap anywhere to walk there
-- [ ] Enable Y-Sort on main scene node
-- [ ] Test tap-to-move on phone — character walks to tapped point
-- [ ] Add interactable object: Area2D + floating Tap label + tap triggers signal
+- [x] Build test room: TileMap floor + NavigationRegion2D (baked)
+- [x] Add NavigationAgent2D to CharacterBody2D — tap anywhere to walk there
+- [x] Enable Y-Sort on main scene node
+- [x] Test tap-to-move on phone — character walks to tapped point
+- [x] Add interactable object: Area2D + floating Tap label + tap triggers signal
 - [ ] Create second character scene (Her)
 - [ ] Implement character switch via heart button (GameManager.active_player)
 - [ ] Camera2D smoothly tweens to active character on switch
