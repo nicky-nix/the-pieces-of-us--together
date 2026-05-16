@@ -360,11 +360,11 @@ Design 8 rooms total — every 5 clears a Memory Stone appears. Repeat twice, th
 - [x] PointLight2D on Her — dark tile reveal prototype
 
 ### Week 2 — Room System (May 22–28)
-- [ ] Design 3 room .tscn files with TileMap + exit Area2D + baked nav mesh
-- [ ] Build RoomManager autoload with shuffled room array
-- [ ] Implement room loading (load + instance + free old)
-- [ ] Add fade transition between rooms
-- [ ] GameManager persists run state across room transitions
+- [x] Design 3 room .tscn files with TileMap + exit Area2D + baked nav mesh
+- [x] Build RoomManager autoload with shuffled room array
+- [x] Implement room loading (load + instance + free old)
+- [x] Add fade transition between rooms
+- [x] GameManager persists run state across room transitions
 - [ ] Design 3 more rooms (6 total)
 - [ ] Add key + locked door puzzle to 1 room
 - [ ] Add crate + pressure switch puzzle to 1 room
