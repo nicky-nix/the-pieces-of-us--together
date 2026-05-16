@@ -354,10 +354,10 @@ Design 8 rooms total — every 5 clears a Memory Stone appears. Repeat twice, th
 - [x] Enable Y-Sort on main scene node
 - [x] Test tap-to-move on phone — character walks to tapped point
 - [x] Add interactable object: Area2D + floating Tap label + tap triggers signal
-- [ ] Create second character scene (Her)
-- [ ] Implement character switch via heart button (GameManager.active_player)
-- [ ] Camera2D smoothly tweens to active character on switch
-- [ ] PointLight2D on Her — dark tile reveal prototype
+- [x] Create second character scene (Her)
+- [x] Implement character switch via heart button (GameManager.active_player)
+- [x] Camera2D smoothly tweens to active character on switch
+- [x] PointLight2D on Her — dark tile reveal prototype
 
 ### Week 2 — Room System (May 22–28)
 - [ ] Design 3 room .tscn files with TileMap + exit Area2D + baked nav mesh
