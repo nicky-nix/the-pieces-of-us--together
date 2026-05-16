@@ -1,40 +1,27 @@
 [gd_scene format=3 uid="uid://bakrvbh782nhs"]
 
-[ext_resource type="Script" uid="uid://cp4xdrmv8d27g" path="res://scenes/main.gd" id="1_jyhfs"]
+[ext_resource type="Script" uid="uid://cp4xdrmv8d27g" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://2wg17uh1lyo6" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://b6lu8gooodhuu" path="res://scenes/interactable.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bto4p3fd6ayv" path="res://scenes/her.tscn" id="2_sugp2"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_0wfyh"]
-vertices = PackedVector2Array(445.8828, 43.859375, 437.10938, 781.59375, 51.617188, 805.3828, 24.359375, 38.140625)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(14, 28, 456, 34, 447, 791, 42, 816)])
-source_geometry_mode = 2
 
 [node name="Main" type="Node2D" unique_id=889243285]
 y_sort_enabled = true
 script = ExtResource("1_jyhfs")
 
 [node name="Player" parent="." unique_id=837006307 instance=ExtResource("1_o5qli")]
+z_index = 10
 position = Vector2(220, 346)
 
 [node name="Her" parent="." unique_id=1534663884 instance=ExtResource("2_sugp2")]
+z_index = 10
 position = Vector2(284, 343)
-
-[node name="Floor" type="ColorRect" parent="." unique_id=1471353988]
-offset_right = 480.0
-offset_bottom = 854.0
-mouse_filter = 2
-color = Color(0.83137256, 0.72156864, 0.5882353, 1)
 
 [node name="Interactable" parent="." unique_id=2140837734 instance=ExtResource("2_0wfyh")]
 position = Vector2(299, 111)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1928511573]
-navigation_polygon = SubResource("NavigationPolygon_0wfyh")
-
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1666867815]
-layer = 10
+layer = 100
 
 [node name="SwitchButton" type="Button" parent="HUD" unique_id=2088966099]
 anchors_preset = 1
@@ -48,11 +35,20 @@ theme_override_font_sizes/font_size = 36
 text = "♥"
 flat = true
 
+[node name="FadeRect" type="ColorRect" parent="HUD" unique_id=1699114211]
+custom_minimum_size = Vector2(480, 854)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1697850246]
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1136912678]
 color = Color(0.16470589, 0.16470589, 0.24313726, 1)
+
+[node name="RoomContainer" type="Node2D" parent="." unique_id=10500152]
 
 [connection signal="pressed" from="HUD/SwitchButton" to="." method="_on_switch_button_pressed"]

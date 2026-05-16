@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bto4p3fd6ayv"]
 
-[ext_resource type="Script" uid="uid://bbwd6nxqk5i5u" path="res://scenes/her.gd" id="1_y8ilm"]
+[ext_resource type="Script" uid="uid://bbwd6nxqk5i5u" path="res://scripts/her.gd" id="1_y8ilm"]
 [ext_resource type="Texture2D" uid="uid://cvh6nf7bub3ow" path="res://light_texture.tres" id="2_lwl7x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]

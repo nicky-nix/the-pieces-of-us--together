@@ -3,13 +3,24 @@ extends Node2D
 @onready var camera = $Camera2D
 @onready var player = $Player
 @onready var her = $Her
+@onready var room_container = $RoomContainer
 
 func _ready():
+	RoomManager.room_container = room_container
+	RoomManager.start_run()
+	player.z_index = 10
+	her.z_index = 10
 	camera.global_position = player.global_position
+	# Move players to start position after room loads
+	await get_tree().process_frame
+	_move_players_to_start()
+
+func _move_players_to_start():
+	player.global_position = Vector2(240, 400)
+	her.global_position = Vector2(280, 400)
 
 func _on_switch_button_pressed():
 	GameManager.switch_character()
-	# Freeze the inactive character exactly where they are
 	if GameManager.active_player == "you":
 		her.get_node("NavigationAgent2D").target_position = her.global_position
 	else:
@@ -34,3 +45,13 @@ func _process(delta):
 	else:
 		target_pos = her.global_position
 	camera.global_position = lerp(camera.global_position, target_pos, delta * 6)
+	
+func fade_out():
+	var tween = create_tween()
+	tween.tween_property($HUD/FadeRect, "modulate:a", 1.0, 0.4)
+	await tween.finished
+
+func fade_in():
+	var tween = create_tween()
+	tween.tween_property($HUD/FadeRect, "modulate:a", 0.0, 0.4)
+	await tween.finished
