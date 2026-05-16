@@ -19,7 +19,4 @@ color = Color(0.34901962, 1, 1, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1972191169]
 shape = SubResource("CapsuleShape2D_u8vuu")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1699744568]
-position_smoothing_enabled = true
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=86853928]

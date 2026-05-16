@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bto4p3fd6ayv"]
+
+[ext_resource type="Script" uid="uid://bbwd6nxqk5i5u" path="res://scenes/her.gd" id="1_y8ilm"]
+[ext_resource type="Texture2D" uid="uid://cvh6nf7bub3ow" path="res://light_texture.tres" id="2_lwl7x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8vuu"]
+radius = 14.0
+height = 40.0
+
+[node name="Her" type="CharacterBody2D" unique_id=837006307 groups=["player"]]
+script = ExtResource("1_y8ilm")
+
+[node name="Sprite" type="ColorRect" parent="." unique_id=1874769045]
+offset_left = -16.0
+offset_top = -48.0
+offset_right = 16.0
+mouse_filter = 2
+color = Color(0.9098039, 0.627451, 0.7058824, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1972191169]
+shape = SubResource("CapsuleShape2D_u8vuu")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=86853928]
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=242181054]
+position = Vector2(1.1920929e-07, -84)
+scale = Vector2(1.1503906, 1.0566406)
+color = Color(1, 0.9607843, 0.8784314, 1)
+energy = 1.5
+range_z_min = -4096
+range_z_max = 4096
+texture = ExtResource("2_lwl7x")
