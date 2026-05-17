@@ -1,16 +1,17 @@
-[gd_scene format=4 uid="uid://bpr3e7fmbl0x0"]
+[gd_scene format=4 uid="uid://d0k4ci668sxhd"]
 
-[ext_resource type="Texture2D" uid="uid://bbq4y0h2v438s" path="res://assets/tiles/floor_tile.png" id="1_rjoje"]
-[ext_resource type="Texture2D" uid="uid://boenim21htnwe" path="res://assets/tiles/wall_tile.png" id="2_bg4i0"]
-[ext_resource type="Script" uid="uid://c5elynq2jjk7d" path="res://scripts/exit_door.gd" id="3_6w2ej"]
+[ext_resource type="Texture2D" uid="uid://bbq4y0h2v438s" path="res://assets/tiles/floor_tile.png" id="1_ccapj"]
+[ext_resource type="Texture2D" uid="uid://boenim21htnwe" path="res://assets/tiles/wall_tile.png" id="2_5d4n5"]
+[ext_resource type="PackedScene" uid="uid://m66sihg2f3dl" path="res://scenes/key.tscn" id="4_6eqho"]
+[ext_resource type="PackedScene" uid="uid://d0r4o8b8co7lk" path="res://scenes/locked_door.tscn" id="5_o8owr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vu5en"]
-texture = ExtResource("1_rjoje")
+texture = ExtResource("1_ccapj")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8oql1"]
-texture = ExtResource("2_bg4i0")
+texture = ExtResource("2_5d4n5")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -21,12 +22,9 @@ sources/0 = SubResource("TileSetAtlasSource_vu5en")
 sources/1 = SubResource("TileSetAtlasSource_8oql1")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xhekj"]
-vertices = PackedVector2Array(-125.96875, 877.14844, -124.02344, 19, 622, 19, 622, 876.02344, -16.890625, 877.85156, -62.03125, 878.1406, -18.96875, 897.6875, -60.007813, 896.2969)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 0, 4), PackedInt32Array(5, 4, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -7.885437, 887.8205, -10, 908, -69, 906, -71, 888, -136, 887)])
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
-size = Vector2(60, 20)
+vertices = PackedVector2Array(622, 876, -125.97656, 876, -124.02344, 19, 622, 19)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -136, 886)])
 
 [node name="Room1" type="Node2D" unique_id=3083982]
 y_sort_enabled = true
@@ -38,19 +36,8 @@ tile_set = SubResource("TileSet_8oql1")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1337021236]
 navigation_polygon = SubResource("NavigationPolygon_xhekj")
 
-[node name="ExitDoor" type="Area2D" parent="." unique_id=791718495]
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("3_6w2ej")
+[node name="Key" parent="." unique_id=28582528 instance=ExtResource("4_6eqho")]
+position = Vector2(210, 354)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDoor" unique_id=1341363070]
-position = Vector2(-40, 896)
-shape = SubResource("RectangleShape2D_irjyx")
-
-[node name="ColorRect" type="ColorRect" parent="ExitDoor" unique_id=356268668]
-custom_minimum_size = Vector2(60, 20)
-offset_left = -70.0
-offset_top = 886.0
-offset_right = -10.0
-offset_bottom = 906.0
-color = Color(0, 1, 1, 1)
+[node name="LockedDoor" parent="." unique_id=269337559 instance=ExtResource("5_o8owr")]
+position = Vector2(521, 6)

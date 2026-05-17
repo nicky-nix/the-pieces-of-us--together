@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dp654xso4deih"]
+
+[ext_resource type="Script" uid="uid://btmmqd480ikxy" path="res://scripts/pressure_switch.gd" id="1_juj5l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfv24"]
+size = Vector2(32, 32)
+
+[node name="PressureSwitch" type="Area2D" unique_id=867929733]
+collision_layer = 16
+script = ExtResource("1_juj5l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=807258584]
+shape = SubResource("RectangleShape2D_qfv24")
+
+[node name="SwitchSprite" type="ColorRect" parent="." unique_id=1810351217]
+custom_minimum_size = Vector2(32, 32)
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.33333334, 0.33333334, 0.33333334, 1)

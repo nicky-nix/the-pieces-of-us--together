@@ -21,9 +21,9 @@ sources/0 = SubResource("TileSetAtlasSource_vu5en")
 sources/1 = SubResource("TileSetAtlasSource_8oql1")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xhekj"]
-vertices = PackedVector2Array(622, 334.09375, 622, 878, -126, 878, -126, 18, 130, 18, 130, -590, 1410, -590, 1533.9063, 326.07813, 1410, -622, 1470, -622, 1470, -590, 1526.0781, -590)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(0, 4, 5, 6, 7), PackedInt32Array(6, 8, 9, 10), PackedInt32Array(7, 6, 10), PackedInt32Array(7, 10, 11)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(120, -600, 1400, -600, 1400, -632, 1480, -632, 1480, -600, 1536, -600, 1544, 336, 632, 344, 632, 888, -136, 888, -136, 8, 120, 8)])
+vertices = PackedVector2Array(1411.0234, -590, 1407.0313, -630.8672, 1472.2266, -630.1172, 1469.2188, -590, 622, 334.09375, 622, 878, -126, 878, -126, 18, 130, 18, 130, -590, 1533.9063, 326.07813, 1526.0781, -590)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7, 8), PackedInt32Array(4, 8, 9, 0, 10), PackedInt32Array(10, 0, 3), PackedInt32Array(10, 3, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(120, -600, 1400, -600, 1396, -641, 1483, -640, 1480, -600, 1536, -600, 1544, 336, 632, 344, 632, 888, -136, 888, -136, 8, 120, 8)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
 size = Vector2(60, 20)
@@ -41,7 +41,8 @@ navigation_polygon = SubResource("NavigationPolygon_xhekj")
 [node name="ExitDoor" type="Area2D" parent="." unique_id=791718495]
 visibility_layer = 2
 position = Vector2(1480, -1536)
-collision_layer = 2
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("3_lsxps")
 metadata/_edit_group_ = true
 

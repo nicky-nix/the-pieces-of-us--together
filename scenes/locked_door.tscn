@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://d0r4o8b8co7lk"]
+
+[ext_resource type="Script" uid="uid://wnd78jy5ppd0" path="res://scripts/locked_door.gd" id="1_4vqge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ua4a5"]
+size = Vector2(60, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30sld"]
+size = Vector2(80, 40)
+
+[node name="LockedDoor" type="StaticBody2D" unique_id=269337559]
+collision_layer = 16
+script = ExtResource("1_4vqge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=596711797]
+shape = SubResource("RectangleShape2D_ua4a5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1388658092]
+offset_left = -30.0
+offset_top = -10.0
+offset_right = 30.0
+offset_bottom = 10.0
+color = Color(0.54509807, 0, 0, 1)
+
+[node name="Label" type="Label" parent="." unique_id=233878474]
+offset_left = -28.0
+offset_top = -35.0
+offset_right = 27.0
+offset_bottom = -12.0
+text = "Locked"
+
+[node name="UnlockZone" type="Area2D" parent="." unique_id=6033977]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnlockZone" unique_id=1416578137]
+shape = SubResource("RectangleShape2D_30sld")
