@@ -21,9 +21,9 @@ sources/0 = SubResource("TileSetAtlasSource_vu5en")
 sources/1 = SubResource("TileSetAtlasSource_8oql1")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xhekj"]
-vertices = PackedVector2Array(622, 876, -125.97656, 876, -124.02344, 19, 622, 19)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -136, 886)])
+vertices = PackedVector2Array(-19.671875, 897.14844, -59.429688, 897.8203, -58.273438, 876, -18.960938, 876, -125.97656, 876, -124.02344, 19, 622, 19, 622, 876)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6), PackedInt32Array(6, 7, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -9.290802, 885.99976, -10, 907, -70, 908, -68.81714, 885.99994, -136, 886)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
 size = Vector2(60, 20)
@@ -39,8 +39,6 @@ tile_set = SubResource("TileSet_8oql1")
 navigation_polygon = SubResource("NavigationPolygon_xhekj")
 
 [node name="ExitDoor" type="Area2D" parent="." unique_id=791718495]
-collision_layer = 16
-collision_mask = 0
 script = ExtResource("3_8oql1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDoor" unique_id=1341363070]
