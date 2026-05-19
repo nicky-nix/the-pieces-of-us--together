@@ -6,6 +6,7 @@
 size = Vector2(32, 32)
 
 [node name="PressureSwitch" type="Area2D" unique_id=867929733]
+collision_layer = 16
 script = ExtResource("1_juj5l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=807258584]
