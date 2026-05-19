@@ -34,3 +34,7 @@ func _physics_process(_delta):
 	var dir = (next - global_position).normalized()
 	velocity = dir * SPEED
 	move_and_slide()
+	
+func stop():
+	velocity = Vector2.ZERO
+	$NavigationAgent2D.target_position = global_position

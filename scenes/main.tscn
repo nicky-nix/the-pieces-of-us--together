@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cp4xdrmv8d27g" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://2wg17uh1lyo6" path="res://scenes/player.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://b6lu8gooodhuu" path="res://scenes/interactable.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bto4p3fd6ayv" path="res://scenes/her.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://d0sojjdcerbas" path="res://scenes/dialogue_manager.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://bxusvsm6c1i38" path="res://scenes/gallery_overlay.tscn" id="5_tefeu"]
@@ -18,9 +17,6 @@ position = Vector2(220, 346)
 [node name="Her" parent="." unique_id=1534663884 instance=ExtResource("2_sugp2")]
 z_index = 10
 position = Vector2(284, 343)
-
-[node name="Interactable" parent="." unique_id=2140837734 instance=ExtResource("2_0wfyh")]
-position = Vector2(299, 111)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1666867815]
 process_mode = 3
@@ -64,6 +60,7 @@ position_smoothing_speed = 8.0
 [node name="RoomContainer" type="Node2D" parent="." unique_id=10500152]
 
 [node name="DialogueManager" parent="." unique_id=2227919 instance=ExtResource("5_tbgi4")]
+typewriter_speed = 2.0
 
 [connection signal="pressed" from="HUD/SwitchButton" to="." method="_on_switch_button_pressed"]
 [connection signal="pressed" from="HUD/GalleryButton" to="." method="_on_gallery_button_pressed"]

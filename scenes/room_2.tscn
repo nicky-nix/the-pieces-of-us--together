@@ -57,3 +57,6 @@ offset_top = 886.0
 offset_right = -10.0
 offset_bottom = 906.0
 color = Color(0, 1, 1, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1319051037]
+color = Color(0.06666667, 0.06666667, 0.06666667, 1)

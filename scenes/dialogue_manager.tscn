@@ -5,7 +5,7 @@
 [node name="DialogueManager" type="CanvasLayer" unique_id=2227919]
 process_mode = 3
 script = ExtResource("1_jbixp")
-typewriter_speed = 1.0
+typewriter_speed = 0.3
 
 [node name="DialogueBox" type="ColorRect" parent="." unique_id=1055073161]
 process_mode = 3
@@ -34,3 +34,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TypewriterTimer" type="Timer" parent="." unique_id=1593251886]
 process_mode = 3
+wait_time = 0.3
+
+[connection signal="timeout" from="TypewriterTimer" to="." method="_on_timer_timeout"]

@@ -45,7 +45,17 @@ func _do_transition():
 	var tween_out = main.create_tween()
 	tween_out.tween_property(fade_rect, "color:a", 1.0, 0.4)
 	await tween_out.finished
-
+	
+	main.player.stop()
+	main.her.stop()
+		
+		# Then move them to start position
+	main.player.global_position = Vector2(240, 400)
+	main.her.global_position = Vector2(280, 400)
+		
+		# Set nav targets to their new positions so they don't walk away
+	main.player.get_node("NavigationAgent2D").target_position = main.player.global_position
+	main.her.get_node("NavigationAgent2D").target_position = main.her.global_position
 	# Next room
 	current_room_index += 1
 	if current_room_index >= rooms.size():

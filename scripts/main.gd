@@ -19,6 +19,9 @@ func _ready():
 func _move_players_to_start():
 	player.global_position = Vector2(240, 400)
 	her.global_position = Vector2(280, 400)
+	player.get_node("NavigationAgent2D").target_position = player.global_position
+	her.get_node("NavigationAgent2D").target_position = her.global_position
+	#velocity = Vector2.ZERO  # if player.gd exposes velocity directly
 
 func _on_switch_button_pressed():
 	# Block during dialogue

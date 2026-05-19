@@ -30,6 +30,12 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 4
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
 size = Vector2(60, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bpmk"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c31ti"]
+size = Vector2(40, 40)
+
 [node name="Room8" type="Node2D" unique_id=3083982]
 y_sort_enabled = true
 script = ExtResource("1_ctd7p")
@@ -72,6 +78,17 @@ offset_bottom = -1.0
 text = "I"
 horizontal_alignment = 1
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LanternA" unique_id=673691007]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_6bpmk")
+
+[node name="PromptLabel" type="Label" parent="LanternA" unique_id=1417800467]
+visible = false
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -25.0
+text = "Tap"
+
 [node name="LanternB" type="Area2D" parent="." unique_id=411813487]
 position = Vector2(272, 128)
 script = ExtResource("5_6bpmk")
@@ -87,3 +104,14 @@ offset_right = 40.0
 offset_bottom = -1.0
 text = "II"
 horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LanternB" unique_id=2066161645]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_c31ti")
+
+[node name="PromptLabel" type="Label" parent="LanternB" unique_id=959713706]
+visible = false
+offset_top = -48.0
+offset_right = 40.0
+offset_bottom = -25.0
+text = "Tap"

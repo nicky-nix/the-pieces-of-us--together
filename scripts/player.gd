@@ -68,3 +68,7 @@ func _physics_process(_delta):
 
 	if not touching_crate:
 		push_arrow.visible = false
+		
+func stop():
+	velocity = Vector2.ZERO
+	$NavigationAgent2D.target_position = global_position

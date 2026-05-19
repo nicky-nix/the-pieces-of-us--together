@@ -2,7 +2,7 @@ extends CanvasLayer
 
 signal dialogue_closed
 
-@export var typewriter_speed: float = 0.05 
+@export var typewriter_speed: float = 0.03
 
 var is_showing = false
 var current_lines = []
@@ -48,7 +48,7 @@ var dialogue_db = {
 func _ready():
 	box.visible = false
 	# Timer signal — make sure only this connection exists
-	timer.timeout.connect(_on_timer_timeout)
+	
 
 func show_dialogue(trigger_id: String):
 	if not dialogue_db.has(trigger_id):
