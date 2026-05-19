@@ -365,10 +365,10 @@ Design 8 rooms total — every 5 clears a Memory Stone appears. Repeat twice, th
 - [x] Implement room loading (load + instance + free old)
 - [x] Add fade transition between rooms
 - [x] GameManager persists run state across room transitions
-- [x] Design 3 more rooms (6 total)
-- [x] Add key + locked door puzzle to 1 room
-- [x] Add crate + pressure switch puzzle to 1 room
-- [x] Playtest full 6-room shuffled run end-to-end
+- [ ] Design 3 more rooms (6 total)
+- [ ] Add key + locked door puzzle to 1 room
+- [ ] Add crate + pressure switch puzzle to 1 room
+- [ ] Playtest full 6-room shuffled run end-to-end
 
 ### Week 3 — Story & Puzzles (May 29–Jun 4)
 - [ ] Build DialogueManager autoload (dictionary, typewriter, tap to advance)
