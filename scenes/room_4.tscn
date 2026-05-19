@@ -26,7 +26,7 @@ vertices = PackedVector2Array(622, 876, -125.97656, 876, -124.02344, 19, 622, 19
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -136, 886)])
 
-[node name="Room1" type="Node2D" unique_id=3083982]
+[node name="Room4" type="Node2D" unique_id=3083982]
 y_sort_enabled = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1598035094]

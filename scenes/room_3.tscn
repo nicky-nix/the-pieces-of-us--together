@@ -28,7 +28,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 8
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
 size = Vector2(60, 20)
 
-[node name="Room1" type="Node2D" unique_id=3083982]
+[node name="Room3" type="Node2D" unique_id=3083982]
 y_sort_enabled = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1598035094]
@@ -39,8 +39,6 @@ tile_set = SubResource("TileSet_8oql1")
 navigation_polygon = SubResource("NavigationPolygon_xhekj")
 
 [node name="ExitDoor" type="Area2D" parent="." unique_id=791718495]
-collision_layer = 16
-collision_mask = 0
 script = ExtResource("3_6w2ej")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDoor" unique_id=1341363070]
