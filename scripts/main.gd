@@ -11,7 +11,8 @@ func _ready():
 	player.z_index = 10
 	her.z_index = 10
 	camera.global_position = player.global_position
-	# Move players to start position after room loads
+	# Gallery starts hidden
+	$HUD/GalleryOverlay.visible = false
 	await get_tree().process_frame
 	_move_players_to_start()
 
@@ -20,6 +21,10 @@ func _move_players_to_start():
 	her.global_position = Vector2(280, 400)
 
 func _on_switch_button_pressed():
+	# Block during dialogue
+	if DialogueManager.is_showing:
+		return
+	# ONE call only — was incorrectly called twice before
 	GameManager.switch_character()
 	if GameManager.active_player == "you":
 		her.get_node("NavigationAgent2D").target_position = her.global_position
@@ -45,7 +50,7 @@ func _process(delta):
 	else:
 		target_pos = her.global_position
 	camera.global_position = lerp(camera.global_position, target_pos, delta * 6)
-	
+
 func fade_out():
 	var tween = create_tween()
 	tween.tween_property($HUD/FadeRect, "modulate:a", 1.0, 0.4)
@@ -55,3 +60,18 @@ func fade_in():
 	var tween = create_tween()
 	tween.tween_property($HUD/FadeRect, "modulate:a", 0.0, 0.4)
 	await tween.finished
+
+func _on_gallery_button_pressed():
+	if DialogueManager.is_showing:
+		return
+	$HUD/GalleryOverlay.visible = true
+	var list = $HUD/GalleryOverlay/ItemList
+	list.clear()
+	if GameManager.collected_memories.is_empty():
+		list.add_item("Nothing found yet...")
+	else:
+		for item_id in GameManager.collected_memories:
+			list.add_item(item_id.capitalize())
+
+func _on_gallery_close_pressed():
+	$HUD/GalleryOverlay.visible = false

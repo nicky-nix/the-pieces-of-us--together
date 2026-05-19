@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://g2fen02v6y33"]
+
+[ext_resource type="Script" uid="uid://jife3m3hboyd" path="res://scripts/memory_stone.gd" id="1_kqm8f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqm8f"]
+size = Vector2(40, 40)
+
+[node name="MemoryStone" type="Area2D" unique_id=977832270]
+script = ExtResource("1_kqm8f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=144230291]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_kqm8f")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1354583063]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 1, 1)

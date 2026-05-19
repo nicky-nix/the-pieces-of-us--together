@@ -2,8 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bbq4y0h2v438s" path="res://assets/tiles/floor_tile.png" id="1_ccapj"]
 [ext_resource type="Texture2D" uid="uid://boenim21htnwe" path="res://assets/tiles/wall_tile.png" id="2_5d4n5"]
-[ext_resource type="PackedScene" uid="uid://m66sihg2f3dl" path="res://scenes/key.tscn" id="4_6eqho"]
-[ext_resource type="PackedScene" uid="uid://d0r4o8b8co7lk" path="res://scenes/locked_door.tscn" id="5_o8owr"]
+[ext_resource type="PackedScene" uid="uid://bh6x2qwiyl76l" path="res://scenes/exit_door.tscn" id="3_ccapj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vu5en"]
 texture = ExtResource("1_ccapj")
@@ -22,9 +21,9 @@ sources/0 = SubResource("TileSetAtlasSource_vu5en")
 sources/1 = SubResource("TileSetAtlasSource_8oql1")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xhekj"]
-vertices = PackedVector2Array(622, 876, -125.97656, 876, -124.02344, 19, 622, 19)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -136, 886)])
+vertices = PackedVector2Array(-62.03125, 876, -125.97656, 876, -124.02344, 19, 622, 19, 622, 876, -17.242188, 876, -60.617188, 897.84375, -18.4375, 897.14844)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(0, 3, 5, 6), PackedInt32Array(6, 5, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -7.799591, 886.00006, -9, 907, -70, 908, -71.414246, 886.00006, -136, 886)])
 
 [node name="Room4" type="Node2D" unique_id=3083982]
 y_sort_enabled = true
@@ -36,8 +35,4 @@ tile_set = SubResource("TileSet_8oql1")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1337021236]
 navigation_polygon = SubResource("NavigationPolygon_xhekj")
 
-[node name="Key" parent="." unique_id=28582528 instance=ExtResource("4_6eqho")]
-position = Vector2(210, 354)
-
-[node name="LockedDoor" parent="." unique_id=269337559 instance=ExtResource("5_o8owr")]
-position = Vector2(521, 6)
+[node name="ExitDoor" parent="." unique_id=756863192 instance=ExtResource("3_ccapj")]

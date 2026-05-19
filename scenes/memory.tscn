@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dyd54ervrly0e"]
+
+[ext_resource type="Script" uid="uid://bsbkvmjhf6ymv" path="res://scripts/memory_item.gd" id="1_c5y6f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0akh5"]
+size = Vector2(40, 40)
+
+[node name="Flower" type="Area2D" unique_id=1924383759]
+script = ExtResource("1_c5y6f")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1706647218]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=217404655]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_0akh5")

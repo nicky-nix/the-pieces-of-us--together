@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*uid://gag566hngba3"
 RoomManager="*uid://dmvewrvj74obx"
+DialogueManager="*uid://d0sojjdcerbas"
 
 [display]
 

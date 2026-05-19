@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bh6x2qwiyl76l"]
+
+[ext_resource type="Script" uid="uid://c5elynq2jjk7d" path="res://scripts/exit_door.gd" id="1_yk4m6"]
+[ext_resource type="PackedScene" uid="uid://g2fen02v6y33" path="res://scenes/memory_stone.tscn" id="2_lxrmt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
+size = Vector2(60, 20)
+
+[node name="ExitDoor" type="Area2D" unique_id=756863192]
+script = ExtResource("1_yk4m6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=306430130]
+position = Vector2(-40, 896)
+shape = SubResource("RectangleShape2D_irjyx")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=862194188]
+custom_minimum_size = Vector2(60, 20)
+offset_left = -70.0
+offset_top = 886.0
+offset_right = -10.0
+offset_bottom = 906.0
+color = Color(0, 1, 1, 1)
+
+[node name="MemoryStone" parent="." unique_id=977832270 instance=ExtResource("2_lxrmt")]
+position = Vector2(216, 456)

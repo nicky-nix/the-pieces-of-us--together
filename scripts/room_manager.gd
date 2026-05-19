@@ -7,6 +7,8 @@ var rooms = [
 	"res://scenes/room_4.tscn",
 	"res://scenes/room_5.tscn",
 	"res://scenes/room_6.tscn",
+	"res://scenes/room_7.tscn",  # light puzzle
+	"res://scenes/room_8.tscn", 
 ]
 
 var current_room_index = 0
@@ -47,10 +49,9 @@ func _do_transition():
 	# Next room
 	current_room_index += 1
 	if current_room_index >= rooms.size():
-		print("Run complete!")
-		var tween_in = main.create_tween()
-		tween_in.tween_property(fade_rect, "color:a", 0.0, 0.4)
-		is_transitioning = false
+		# Stay faded to black, then switch scene
+		await get_tree().create_timer(0.5).timeout
+		get_tree().change_scene_to_file("res://scenes/epilogue.tscn")
 		return
 
 	await load_room(current_room_index)
@@ -103,3 +104,5 @@ func _find_node(node: Node, target_name: String) -> Node:
 		if result != null:
 			return result
 	return null
+	
+	

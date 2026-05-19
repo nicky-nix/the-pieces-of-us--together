@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://2wg17uh1lyo6" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://b6lu8gooodhuu" path="res://scenes/interactable.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bto4p3fd6ayv" path="res://scenes/her.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://d0sojjdcerbas" path="res://scenes/dialogue_manager.tscn" id="5_tbgi4"]
 
 [node name="Main" type="Node2D" unique_id=889243285]
 y_sort_enabled = true
@@ -21,9 +22,11 @@ position = Vector2(284, 343)
 position = Vector2(299, 111)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1666867815]
+process_mode = 3
 layer = 100
 
 [node name="SwitchButton" type="Button" parent="HUD" unique_id=2088966099]
+process_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -36,19 +39,65 @@ text = "♥"
 flat = true
 
 [node name="FadeRect" type="ColorRect" parent="HUD" unique_id=1699114211]
+process_mode = 3
 custom_minimum_size = Vector2(480, 854)
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
+[node name="GalleryButton" type="Button" parent="HUD" unique_id=925436201]
+process_mode = 3
+custom_minimum_size = Vector2(60, 35)
+offset_right = 24.0
+offset_bottom = 31.0
+text = "📖"
+flat = true
+
+[node name="GalleryOverlay" type="ColorRect" parent="HUD" unique_id=467924348]
+process_mode = 3
+offset_left = 1.0
+offset_right = 41.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)
+
+[node name="TitleLabel" type="Label" parent="HUD/GalleryOverlay" unique_id=298508965]
+process_mode = 3
+layout_mode = 0
+offset_left = 51.0
+offset_top = -1.0
+offset_right = 157.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 22
+text = "Memories"
+horizontal_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="HUD/GalleryOverlay" unique_id=1340028960]
+process_mode = 3
+layout_mode = 0
+offset_left = 221.0
+offset_top = 4.0
+offset_right = 261.0
+offset_bottom = 44.0
+select_mode = 2
+
+[node name="CloseButton" type="Button" parent="HUD/GalleryOverlay" unique_id=1330137639]
+process_mode = 3
+layout_mode = 0
+offset_left = 72.0
+offset_top = 46.0
+offset_right = 122.0
+offset_bottom = 77.0
+text = "Close"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1697850246]
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
-[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1136912678]
-color = Color(0.16470589, 0.16470589, 0.24313726, 1)
-
 [node name="RoomContainer" type="Node2D" parent="." unique_id=10500152]
 
+[node name="DialogueManager" parent="." unique_id=2227919 instance=ExtResource("5_tbgi4")]
+
 [connection signal="pressed" from="HUD/SwitchButton" to="." method="_on_switch_button_pressed"]
+[connection signal="pressed" from="HUD/GalleryButton" to="." method="_on_gallery_button_pressed"]
+[connection signal="pressed" from="HUD/GalleryOverlay/CloseButton" to="." method="_on_close_button_pressed"]

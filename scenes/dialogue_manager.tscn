@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://d0sojjdcerbas"]
+
+[ext_resource type="Script" uid="uid://cg23oxfl5gy2e" path="res://scripts/dialogue_manager.gd" id="1_jbixp"]
+
+[node name="DialogueManager" type="CanvasLayer" unique_id=2227919]
+process_mode = 3
+script = ExtResource("1_jbixp")
+typewriter_speed = 1.0
+
+[node name="DialogueBox" type="ColorRect" parent="." unique_id=1055073161]
+process_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -209.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.101960786, 0.101960786, 0.18039216, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="DialogueBox" unique_id=207193385]
+process_mode = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.9125
+anchor_bottom = 0.8803828
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TypewriterTimer" type="Timer" parent="." unique_id=1593251886]
+process_mode = 3

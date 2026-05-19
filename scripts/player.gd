@@ -14,6 +14,8 @@ func _ready():
 	push_arrow.visible = false
 
 func _input(event):
+	if DialogueManager.is_showing:
+		return
 	if not GameManager.active_player == "you":
 		return
 	if touching_crate:
@@ -25,7 +27,7 @@ func _input(event):
 		var world_pos = get_global_mouse_position()
 		agent.target_position = world_pos
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not GameManager.active_player == "you":
 		velocity = Vector2.ZERO
 		push_arrow.visible = false

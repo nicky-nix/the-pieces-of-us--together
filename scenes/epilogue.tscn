@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://og621uug2mwi"]
+
+[ext_resource type="Script" uid="uid://cfj3aoums3dh5" path="res://scripts/epilogue.gd" id="1_1s7hj"]
+[ext_resource type="PackedScene" uid="uid://bto4p3fd6ayv" path="res://scenes/her.tscn" id="1_kmtq4"]
+[ext_resource type="PackedScene" uid="uid://2wg17uh1lyo6" path="res://scenes/player.tscn" id="2_1s7hj"]
+
+[node name="Epilogue" type="Node2D" unique_id=743175666]
+script = ExtResource("1_1s7hj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=792294188]
+
+[node name="FadeRect" type="ColorRect" parent="CanvasLayer" unique_id=618293424]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="ColorRect" parent="." unique_id=908331816]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Her" parent="." unique_id=837006307 instance=ExtResource("1_kmtq4")]
+position = Vector2(-152, 32)
+
+[node name="Player" parent="." unique_id=2146099641 instance=ExtResource("2_1s7hj")]
+position = Vector2(240, 32)
+
+[node name="MessageLabel" type="Label" parent="." unique_id=1460464120]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.9607843, 0.9411765, 0.9098039, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+autowrap_mode = 2

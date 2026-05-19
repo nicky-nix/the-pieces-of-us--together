@@ -11,6 +11,8 @@ func _ready():
 	light.visible = false
 
 func _input(event):
+	if DialogueManager.is_showing:
+		return
 	if not GameManager.active_player == "her":
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
@@ -20,7 +22,7 @@ func _input(event):
 		var world_pos = get_global_mouse_position()
 		agent.target_position = world_pos
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	light.visible = (GameManager.active_player == "her")
 	if not GameManager.active_player == "her":
 		velocity = Vector2.ZERO
