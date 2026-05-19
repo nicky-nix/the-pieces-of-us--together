@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bxusvsm6c1i38"]
+
+[node name="GalleryOverlay" type="ColorRect" unique_id=2100038742]
+process_mode = 3
+offset_left = 78.0
+offset_top = 331.0
+offset_right = 413.0
+offset_bottom = 529.0
+color = Color(0, 0, 0, 1)
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1798177810]
+process_mode = 3
+layout_mode = 0
+offset_left = 28.0
+offset_top = 8.0
+offset_right = 134.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 22
+text = "Memories"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="." unique_id=1841321918]
+process_mode = 3
+layout_mode = 0
+offset_left = 266.0
+offset_top = 8.0
+offset_right = 316.0
+offset_bottom = 39.0
+text = "Close"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=160053071]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 45.0
+offset_right = 326.0
+offset_bottom = 189.0
+
+[node name="ItemContainer" type="VBoxContainer" parent="." unique_id=2045799192]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 61.0
+offset_right = 302.0
+offset_bottom = 172.0

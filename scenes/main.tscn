@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b6lu8gooodhuu" path="res://scenes/interactable.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bto4p3fd6ayv" path="res://scenes/her.tscn" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://d0sojjdcerbas" path="res://scenes/dialogue_manager.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://bxusvsm6c1i38" path="res://scenes/gallery_overlay.tscn" id="5_tefeu"]
 
 [node name="Main" type="Node2D" unique_id=889243285]
 y_sort_enabled = true
@@ -54,41 +55,7 @@ offset_bottom = 31.0
 text = "📖"
 flat = true
 
-[node name="GalleryOverlay" type="ColorRect" parent="HUD" unique_id=467924348]
-process_mode = 3
-offset_left = 1.0
-offset_right = 41.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 1)
-
-[node name="TitleLabel" type="Label" parent="HUD/GalleryOverlay" unique_id=298508965]
-process_mode = 3
-layout_mode = 0
-offset_left = 51.0
-offset_top = -1.0
-offset_right = 157.0
-offset_bottom = 30.0
-theme_override_font_sizes/font_size = 22
-text = "Memories"
-horizontal_alignment = 1
-
-[node name="ItemList" type="ItemList" parent="HUD/GalleryOverlay" unique_id=1340028960]
-process_mode = 3
-layout_mode = 0
-offset_left = 221.0
-offset_top = 4.0
-offset_right = 261.0
-offset_bottom = 44.0
-select_mode = 2
-
-[node name="CloseButton" type="Button" parent="HUD/GalleryOverlay" unique_id=1330137639]
-process_mode = 3
-layout_mode = 0
-offset_left = 72.0
-offset_top = 46.0
-offset_right = 122.0
-offset_bottom = 77.0
-text = "Close"
+[node name="GalleryOverlay" parent="HUD" unique_id=2100038742 instance=ExtResource("5_tefeu")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1697850246]
 position_smoothing_enabled = true
@@ -100,4 +67,6 @@ position_smoothing_speed = 8.0
 
 [connection signal="pressed" from="HUD/SwitchButton" to="." method="_on_switch_button_pressed"]
 [connection signal="pressed" from="HUD/GalleryButton" to="." method="_on_gallery_button_pressed"]
-[connection signal="pressed" from="HUD/GalleryOverlay/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="HUD/GalleryOverlay/CloseButton" to="." method="_on_gallery_close_pressed"]
+
+[editable path="HUD/GalleryOverlay"]

@@ -65,13 +65,26 @@ func _on_gallery_button_pressed():
 	if DialogueManager.is_showing:
 		return
 	$HUD/GalleryOverlay.visible = true
-	var list = $HUD/GalleryOverlay/ItemList
-	list.clear()
-	if GameManager.collected_memories.is_empty():
-		list.add_item("Nothing found yet...")
-	else:
-		for item_id in GameManager.collected_memories:
-			list.add_item(item_id.capitalize())
+	_populate_gallery()
+
+func _populate_gallery():
+	var all_items = {
+		"book": "The Book",
+		"flower": "The Flower",
+	}
+	var container = $HUD/GalleryOverlay/ItemContainer
+	for child in container.get_children():
+		child.queue_free()
+	for item_id in all_items:
+		var label = Label.new()
+		if GameManager.collected_memories.has(item_id):
+			label.text = "✦  " + all_items[item_id]
+			label.modulate = Color("#e8e0f0")
+		else:
+			label.text = "?  Not yet found"
+			label.modulate = Color("#3a3a5c")
+		label.add_theme_font_size_override("font_size", 16)
+		container.add_child(label)
 
 func _on_gallery_close_pressed():
 	$HUD/GalleryOverlay.visible = false
