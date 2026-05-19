@@ -1,4 +1,4 @@
-# 💖 The Pieces of Us · Together — Complete MVP Design Document
+# The Pieces of Us · Together — Complete MVP Design Document
 
 *A heartfelt, 2D puzzle‑platformer built in Godot for Android.  
 Made with love for her 18th birthday on June 27th.  
