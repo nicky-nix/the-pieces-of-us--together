@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bh6x2qwiyl76l"]
 
 [ext_resource type="Script" uid="uid://c5elynq2jjk7d" path="res://scripts/exit_door.gd" id="1_yk4m6"]
-[ext_resource type="PackedScene" uid="uid://g2fen02v6y33" path="res://scenes/memory_stone.tscn" id="2_lxrmt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
 size = Vector2(60, 20)
@@ -20,6 +19,3 @@ offset_top = 886.0
 offset_right = -10.0
 offset_bottom = 906.0
 color = Color(0, 1, 1, 1)
-
-[node name="MemoryStone" parent="." unique_id=977832270 instance=ExtResource("2_lxrmt")]
-position = Vector2(216, 456)

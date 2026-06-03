@@ -53,6 +53,24 @@ flat = true
 
 [node name="GalleryOverlay" parent="HUD" unique_id=2100038742 instance=ExtResource("5_tefeu")]
 
+[node name="RoomNameLabel" type="Label" parent="HUD" unique_id=450503100]
+offset_left = 140.0
+offset_top = 342.0
+offset_right = 346.0
+offset_bottom = 465.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MemoryCounter" type="Label" parent="HUD" unique_id=585792387]
+offset_left = 162.0
+offset_top = 1.0
+offset_right = 321.0
+offset_bottom = 43.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1697850246]
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0

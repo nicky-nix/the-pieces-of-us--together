@@ -5,11 +5,14 @@ var rooms = [
 	"res://scenes/room_1.tscn",
 	"res://scenes/room_2.tscn",
 	"res://scenes/room_3.tscn",
+	"res://scenes/room_memory_1.tscn",
 	"res://scenes/room_4.tscn",
 	"res://scenes/room_5.tscn",
+	"res://scenes/room_memory_2.tscn",
 	"res://scenes/room_6.tscn",
 	"res://scenes/room_7.tscn",
 	"res://scenes/room_8.tscn",
+	"res://scenes/room_memory_3.tscn",
 ]
 
 var current_room_index = 0
@@ -18,8 +21,7 @@ var room_container: Node = null
 var is_transitioning = false
 
 func start_run():
-	# Change back to 0 after debugging room_8
-	current_room_index = 7
+	current_room_index = 0
 	is_transitioning = false
 	load_room(current_room_index)
 
@@ -74,6 +76,10 @@ func _do_transition():
 
 	is_transitioning = false
 
+	# Show room name after fade in
+	if main.has_method("show_room_name_for_index"):
+		main.show_room_name_for_index(current_room_index)
+
 func load_room(index: int):
 	if current_room_instance != null:
 		current_room_instance.queue_free()
@@ -84,7 +90,6 @@ func load_room(index: int):
 	current_room_instance = room_scene.instantiate()
 	room_container.add_child(current_room_instance)
 	print("Room loaded: ", rooms[index])
-
 	_connect_exit(current_room_instance)
 
 func _connect_exit(room: Node):

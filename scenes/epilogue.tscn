@@ -10,12 +10,11 @@ script = ExtResource("1_1s7hj")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=792294188]
 
 [node name="FadeRect" type="ColorRect" parent="CanvasLayer" unique_id=618293424]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Background" type="ColorRect" parent="." unique_id=908331816]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Her" parent="." unique_id=837006307 instance=ExtResource("1_kmtq4")]
 position = Vector2(-152, 32)
@@ -29,10 +28,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = 135.0
+offset_top = 113.0
+offset_right = 338.0
+offset_bottom = 293.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -40,4 +39,5 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0.9607843, 0.9411765, 0.9098039, 1)
 theme_override_font_sizes/font_size = 22
 horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 2

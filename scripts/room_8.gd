@@ -1,15 +1,15 @@
 # room_8.gd
-# Attach to Room8 root Node2D — symbol match puzzle using LanternA and LanternB.
-
 extends Node2D
 
 const SYMBOLS = ["✦", "◈", "⬡", "◉", "▲", "✿"]
+const HINT_AFTER_TAPS = 8   # show hint after this many wrong taps
 
 var target_a: String = ""
 var target_b: String = ""
 var current_a: String = ""
 var current_b: String = ""
 var is_solved = false
+var tap_count = 0
 
 @onready var lantern_a      = $LanternA
 @onready var lantern_b      = $LanternB
@@ -22,17 +22,12 @@ var is_solved = false
 @onready var exit_door      = $ExitDoor
 
 func _ready():
-	# Lock exit until solved
 	exit_door.monitoring = false
 	exit_door.monitorable = false
-
 	solved_label.visible = false
 
-	# Random targets
 	target_a = SYMBOLS[randi() % SYMBOLS.size()]
 	target_b = SYMBOLS[randi() % SYMBOLS.size()]
-
-	# Player starts on first symbol
 	current_a = SYMBOLS[0]
 	current_b = SYMBOLS[0]
 
@@ -41,11 +36,9 @@ func _ready():
 	label_a.text = current_a
 	label_b.text = current_b
 
-	# Connect lantern taps
 	lantern_a.interacted.connect(_on_lantern_a_tapped)
 	lantern_b.interacted.connect(_on_lantern_b_tapped)
 
-	# Room intro dialogue
 	await get_tree().create_timer(0.6).timeout
 	DialogueManager.show_dialogue("room_starfield")
 
@@ -54,6 +47,8 @@ func _on_lantern_a_tapped():
 		return
 	current_a = _next_symbol(current_a)
 	label_a.text = current_a
+	tap_count += 1
+	_check_hint()
 	_check_solution()
 
 func _on_lantern_b_tapped():
@@ -61,11 +56,24 @@ func _on_lantern_b_tapped():
 		return
 	current_b = _next_symbol(current_b)
 	label_b.text = current_b
+	tap_count += 1
+	_check_hint()
 	_check_solution()
 
 func _next_symbol(current: String) -> String:
-	var idx = SYMBOLS.find(current)
-	return SYMBOLS[(idx + 1) % SYMBOLS.size()]
+	return SYMBOLS[(SYMBOLS.find(current) + 1) % SYMBOLS.size()]
+
+func _check_hint():
+	if tap_count == HINT_AFTER_TAPS:
+		# Flash the correct target labels to give the player a nudge
+		for lbl in [target_label_a, target_label_b]:
+			var tween = create_tween()
+			tween.tween_property(lbl, "modulate", Color(1.5, 1.5, 0.3, 1.0), 0.2)
+			tween.tween_property(lbl, "modulate", Color(0.6, 0.6, 0.8, 1.0), 0.3)
+			tween.tween_property(lbl, "modulate", Color(1.5, 1.5, 0.3, 1.0), 0.2)
+			tween.tween_property(lbl, "modulate", Color(0.6, 0.6, 0.8, 1.0), 0.3)
+		hint_label.text = "Match each lantern to the symbol above it."
+		tap_count = 0  # reset so hint can fire again if needed
 
 func _check_solution():
 	if current_a == target_a and current_b == target_b:
