@@ -376,11 +376,11 @@ Design 8 rooms total — every 5 clears a Memory Stone appears. Repeat twice, th
 - [x] Write all dialogue lines (room intros, items, memory stones, epilogue)
 - [x] Add light puzzle room (Her light only)
 - [x] Add symbol match room
-- [ ] Total rooms: 8 (plus 3 Memory Stone rooms)
-- [ ] Build Epilogue scene (characters meet, final message, personal photo)
+- [x] Total rooms: 8 (plus 3 Memory Stone rooms)
+- [x] Build Epilogue scene (characters meet, final message, personal photo)
 - [x] Add memory item collectibles (2 rooms)
 - [x] Link all scenes with fade transitions
-- [ ] Playtest full game — note any pacing issues
+- [x] Playtest full game — note any pacing issues
 
 ### Week 4 — Art & Visuals (Jun 5–11)
 - [ ] Design "You" sprite: 4-direction walk (32×32, 3 frames each)
