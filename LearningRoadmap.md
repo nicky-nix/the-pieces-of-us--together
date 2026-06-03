@@ -375,7 +375,7 @@ Design 8 rooms total — every 5 clears a Memory Stone appears. Repeat twice, th
 - [x] Add Memory Stone to every 5th room — triggers dialogue
 - [x] Write all dialogue lines (room intros, items, memory stones, epilogue)
 - [x] Add light puzzle room (Her light only)
-- [ ] Add symbol match room
+- [x] Add symbol match room
 - [ ] Total rooms: 8 (plus 3 Memory Stone rooms)
 - [ ] Build Epilogue scene (characters meet, final message, personal photo)
 - [x] Add memory item collectibles (2 rooms)
