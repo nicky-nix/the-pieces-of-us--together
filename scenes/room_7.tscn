@@ -28,7 +28,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -10.273727, 886, -10, 906, -70, 906, -71.76938, 886, -136, 886)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
-size = Vector2(60, 20)
+size = Vector2(60, 31)
 
 [node name="Room7" type="Node2D" unique_id=3083982]
 y_sort_enabled = true
@@ -42,17 +42,18 @@ tile_set = SubResource("TileSet_8oql1")
 navigation_polygon = SubResource("NavigationPolygon_xhekj")
 
 [node name="ExitDoor" type="Area2D" parent="." unique_id=791718495]
+position = Vector2(-2, 2)
 script = ExtResource("3_0y5eb")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDoor" unique_id=1341363070]
-position = Vector2(-40, 896)
+position = Vector2(-40, 890.5)
 shape = SubResource("RectangleShape2D_irjyx")
 
 [node name="ColorRect" type="ColorRect" parent="ExitDoor" unique_id=356268668]
 custom_minimum_size = Vector2(60, 20)
 offset_left = -70.0
-offset_top = 886.0
+offset_top = 874.0
 offset_right = -10.0
 offset_bottom = 906.0
 color = Color(0, 1, 1, 1)

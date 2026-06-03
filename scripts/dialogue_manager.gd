@@ -43,6 +43,7 @@ var dialogue_db = {
 	"flower_found": ["A small thing. But it made me think of you."],
 	"book_found": ["The book I lent you. I wonder if you ever finished it."],
 	"symbol_solved": ["Something clicked. The way forward is open."],
+	"room_dark_hint": ["Only she can find the way out. Switch to Her."],
 }
 
 func _ready():

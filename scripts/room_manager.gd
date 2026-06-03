@@ -1,5 +1,8 @@
+# room_manager.gd — autoload as RoomManager
 extends Node
 
+# EDIT THIS LIST to set your story order. No shuffle.
+# Put them in the exact sequence you want the player to experience.
 var rooms = [
 	"res://scenes/room_1.tscn",
 	"res://scenes/room_2.tscn",
@@ -7,8 +10,8 @@ var rooms = [
 	"res://scenes/room_4.tscn",
 	"res://scenes/room_5.tscn",
 	"res://scenes/room_6.tscn",
-	"res://scenes/room_7.tscn",  # light puzzle
-	"res://scenes/room_8.tscn", 
+	"res://scenes/room_7.tscn",
+	"res://scenes/room_8.tscn",
 ]
 
 var current_room_index = 0
@@ -17,70 +20,73 @@ var room_container: Node = null
 var is_transitioning = false
 
 func start_run():
-	rooms.shuffle()
-	current_room_index = 0
+	# NO shuffle — rooms play in the order listed above
+	current_room_index = 7
 	is_transitioning = false
 	load_room(current_room_index)
 
 func go_to_next_room():
-	# Prevent double triggering
 	if is_transitioning:
 		return
 	is_transitioning = true
-	print("=== Going to next room ===")
+	print("=== Going to next room: ", current_room_index + 1, " ===")
 	_do_transition()
 
 func _do_transition():
 	var main = get_tree().get_root().get_node_or_null("Main")
 	if main == null:
 		print("ERROR: Main not found")
+		is_transitioning = false
 		return
 
 	var fade_rect = main.get_node_or_null("HUD/FadeRect")
 	if fade_rect == null:
 		print("ERROR: FadeRect not found")
+		is_transitioning = false
 		return
 
 	# Fade out
 	var tween_out = main.create_tween()
 	tween_out.tween_property(fade_rect, "color:a", 1.0, 0.4)
 	await tween_out.finished
-	
+
+	# Stop both characters and snap them to start
 	main.player.stop()
 	main.her.stop()
-		
-		# Then move them to start position
 	main.player.global_position = Vector2(240, 400)
 	main.her.global_position = Vector2(280, 400)
-		
-		# Set nav targets to their new positions so they don't walk away
 	main.player.get_node("NavigationAgent2D").target_position = main.player.global_position
 	main.her.get_node("NavigationAgent2D").target_position = main.her.global_position
-	# Next room
+
+	# Advance index
 	current_room_index += 1
+
 	if current_room_index >= rooms.size():
-		# Stay faded to black, then switch scene
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://scenes/epilogue.tscn")
 		return
 
 	await load_room(current_room_index)
 
-	# Move players to start
-	main.get_node("Player").global_position = Vector2(240, 400)
-	main.get_node("Her").global_position = Vector2(280, 400)
+	# Reposition after load
+	main.player.global_position = Vector2(240, 400)
+	main.her.global_position = Vector2(280, 400)
+	main.player.get_node("NavigationAgent2D").target_position = main.player.global_position
+	main.her.get_node("NavigationAgent2D").target_position = main.her.global_position
 
 	# Fade in
 	var tween_in = main.create_tween()
 	tween_in.tween_property(fade_rect, "color:a", 0.0, 0.4)
 	await tween_in.finished
+
 	is_transitioning = false
 
-func load_room(index):
-	# Free old room
+func load_room(index: int):
+	# Free old room and wait for it to fully leave the tree
 	if current_room_instance != null:
 		current_room_instance.queue_free()
 		await current_room_instance.tree_exited
+		current_room_instance = null
 
 	# Load new room
 	var room_scene = load(rooms[index])
@@ -88,17 +94,15 @@ func load_room(index):
 	room_container.add_child(current_room_instance)
 	print("Room loaded: ", rooms[index])
 
-	# Find and connect ExitDoor
+	# Connect ExitDoor — fresh instance so no stale signal
 	_connect_exit(current_room_instance)
 
-func _connect_exit(room):
-	# Search for ExitDoor anywhere in the room tree
+func _connect_exit(room: Node):
 	var exit = _find_node(room, "ExitDoor")
 	if exit == null:
 		print("WARNING: No ExitDoor found in room")
 		return
-	if exit.exit_reached.is_connected(go_to_next_room):
-		return
+	# Fresh instance = signal is never already connected, no need to check
 	exit.exit_reached.connect(go_to_next_room)
 	print("ExitDoor connected in: ", room.name)
 
@@ -114,5 +118,3 @@ func _find_node(node: Node, target_name: String) -> Node:
 		if result != null:
 			return result
 	return null
-	
-	

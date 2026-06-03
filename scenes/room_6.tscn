@@ -28,7 +28,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(-134, 9, 632, 9, 632, 886, -10.273727, 886, -10, 906, -70, 906, -71.76938, 886, -136, 886)])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irjyx"]
-size = Vector2(60, 20)
+size = Vector2(60, 25)
 
 [node name="Room6" type="Node2D" unique_id=3083982]
 y_sort_enabled = true
@@ -45,7 +45,7 @@ navigation_polygon = SubResource("NavigationPolygon_xhekj")
 script = ExtResource("3_gofo1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDoor" unique_id=1341363070]
-position = Vector2(-40, 896)
+position = Vector2(-40, 893.5)
 shape = SubResource("RectangleShape2D_irjyx")
 
 [node name="ColorRect" type="ColorRect" parent="ExitDoor" unique_id=356268668]

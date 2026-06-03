@@ -48,6 +48,7 @@ tile_set = SubResource("TileSet_8oql1")
 navigation_polygon = SubResource("NavigationPolygon_xhekj")
 
 [node name="ExitDoor" type="Area2D" parent="." unique_id=791718495]
+monitoring = false
 script = ExtResource("3_6bpmk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitDoor" unique_id=1341363070]
@@ -63,7 +64,7 @@ offset_bottom = 906.0
 color = Color(0, 1, 1, 1)
 
 [node name="LanternA" type="Area2D" parent="." unique_id=1606188934]
-position = Vector2(-16, 128)
+position = Vector2(86, 195)
 script = ExtResource("5_6bpmk")
 metadata/_edit_group_ = true
 
@@ -89,8 +90,12 @@ offset_right = 40.0
 offset_bottom = -25.0
 text = "Tap"
 
+[node name="SymbolLabel" type="Label" parent="LanternA" unique_id=1573305307]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="LanternB" type="Area2D" parent="." unique_id=411813487]
-position = Vector2(272, 128)
+position = Vector2(187, 192)
 script = ExtResource("5_6bpmk")
 metadata/_edit_group_ = true
 
@@ -115,3 +120,33 @@ offset_top = -48.0
 offset_right = 40.0
 offset_bottom = -25.0
 text = "Tap"
+
+[node name="SymbolLabel" type="Label" parent="LanternB" unique_id=1218914943]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HintLabel" type="Label" parent="." unique_id=1983947805]
+offset_left = 131.0
+offset_top = 136.0
+offset_right = 171.0
+offset_bottom = 159.0
+
+[node name="SolvedLabel" type="Label" parent="." unique_id=1680776017]
+offset_left = 131.0
+offset_top = 136.0
+offset_right = 171.0
+offset_bottom = 159.0
+
+[node name="TargetA" type="Label" parent="." unique_id=495886766]
+offset_left = 45.0
+offset_top = 134.0
+offset_right = 85.0
+offset_bottom = 157.0
+theme_override_colors/font_color = Color(0.012281331, 0, 0.7324104, 1)
+
+[node name="TargetB" type="Label" parent="." unique_id=221424181]
+offset_left = 131.0
+offset_top = 72.0
+offset_right = 171.0
+offset_bottom = 95.0
+theme_override_colors/font_color = Color(0.078431375, 0.12156863, 1, 1)
