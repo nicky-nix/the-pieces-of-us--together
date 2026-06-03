@@ -1,3 +1,4 @@
+# interactable.gd
 extends Area2D
 
 signal interacted
@@ -25,10 +26,19 @@ func _input(event):
 		return
 	if DialogueManager.is_showing:
 		return
+
+	# Mobile tap
 	if event is InputEventScreenTouch and not event.pressed:
-		# Check if the tap position is within this area's collision shape
 		var tap_pos = get_viewport().get_canvas_transform().affine_inverse() * event.position
-		var distance = global_position.distance_to(tap_pos)
-		if distance < 60:  # tap within 60px of the lantern center
+		if global_position.distance_to(tap_pos) < 60:
+			print("Lantern tapped (touch)")
 			emit_signal("interacted")
-			get_viewport().set
+			get_viewport().set_input_as_handled()
+
+	# Desktop mouse click
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		var mouse_pos = get_global_mouse_position()
+		if global_position.distance_to(mouse_pos) < 60:
+			print("Lantern clicked (mouse)")
+			emit_signal("interacted")
+			get_viewport().set_input_as_handled()

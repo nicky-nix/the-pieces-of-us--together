@@ -1,8 +1,6 @@
 # room_manager.gd — autoload as RoomManager
 extends Node
 
-# EDIT THIS LIST to set your story order. No shuffle.
-# Put them in the exact sequence you want the player to experience.
 var rooms = [
 	"res://scenes/room_1.tscn",
 	"res://scenes/room_2.tscn",
@@ -20,7 +18,7 @@ var room_container: Node = null
 var is_transitioning = false
 
 func start_run():
-	# NO shuffle — rooms play in the order listed above
+	# Change back to 0 after debugging room_8
 	current_room_index = 7
 	is_transitioning = false
 	load_room(current_room_index)
@@ -45,12 +43,10 @@ func _do_transition():
 		is_transitioning = false
 		return
 
-	# Fade out
 	var tween_out = main.create_tween()
 	tween_out.tween_property(fade_rect, "color:a", 1.0, 0.4)
 	await tween_out.finished
 
-	# Stop both characters and snap them to start
 	main.player.stop()
 	main.her.stop()
 	main.player.global_position = Vector2(240, 400)
@@ -58,7 +54,6 @@ func _do_transition():
 	main.player.get_node("NavigationAgent2D").target_position = main.player.global_position
 	main.her.get_node("NavigationAgent2D").target_position = main.her.global_position
 
-	# Advance index
 	current_room_index += 1
 
 	if current_room_index >= rooms.size():
@@ -68,13 +63,11 @@ func _do_transition():
 
 	await load_room(current_room_index)
 
-	# Reposition after load
 	main.player.global_position = Vector2(240, 400)
 	main.her.global_position = Vector2(280, 400)
 	main.player.get_node("NavigationAgent2D").target_position = main.player.global_position
 	main.her.get_node("NavigationAgent2D").target_position = main.her.global_position
 
-	# Fade in
 	var tween_in = main.create_tween()
 	tween_in.tween_property(fade_rect, "color:a", 0.0, 0.4)
 	await tween_in.finished
@@ -82,27 +75,23 @@ func _do_transition():
 	is_transitioning = false
 
 func load_room(index: int):
-	# Free old room and wait for it to fully leave the tree
 	if current_room_instance != null:
 		current_room_instance.queue_free()
 		await current_room_instance.tree_exited
 		current_room_instance = null
 
-	# Load new room
 	var room_scene = load(rooms[index])
 	current_room_instance = room_scene.instantiate()
 	room_container.add_child(current_room_instance)
 	print("Room loaded: ", rooms[index])
 
-	# Connect ExitDoor — fresh instance so no stale signal
 	_connect_exit(current_room_instance)
 
 func _connect_exit(room: Node):
 	var exit = _find_node(room, "ExitDoor")
 	if exit == null:
-		print("WARNING: No ExitDoor found in room")
+		print("WARNING: No ExitDoor found in room — ", room.name)
 		return
-	# Fresh instance = signal is never already connected, no need to check
 	exit.exit_reached.connect(go_to_next_room)
 	print("ExitDoor connected in: ", room.name)
 
