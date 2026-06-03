@@ -138,16 +138,17 @@ text = "✦"
 horizontal_alignment = 1
 
 [node name="HintLabel" type="Label" parent="." unique_id=1983947805]
-offset_left = 131.0
-offset_top = 136.0
-offset_right = 171.0
-offset_bottom = 159.0
+offset_left = 32.0
+offset_top = 265.0
+offset_right = 322.0
+offset_bottom = 288.0
+horizontal_alignment = 1
 
 [node name="SolvedLabel" type="Label" parent="." unique_id=1680776017]
-offset_left = 146.0
-offset_top = 249.0
-offset_right = 186.0
-offset_bottom = 272.0
+offset_left = 106.0
+offset_top = 255.0
+offset_right = 146.0
+offset_bottom = 278.0
 horizontal_alignment = 1
 
 [node name="TargetA" type="Label" parent="." unique_id=495886766]
