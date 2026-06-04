@@ -383,8 +383,8 @@ Design 8 rooms total — every 5 clears a Memory Stone appears. Repeat twice, th
 - [x] Playtest full game — note any pacing issues
 
 ### Week 4 — Art & Visuals (Jun 5–11)
-- [ ] Design "You" sprite: 4-direction walk (32×32, 3 frames each)
-- [ ] Design "Her" sprite: same structure, different palette + light glow
+- [x] Design "You" sprite: 4-direction walk (32×32, 3 frames each)
+- [x] Design "Her" sprite: same structure, different palette + light glow
 - [ ] Create tileset: floor, wall, wall-top, door, switch, crate
 - [ ] Draw memory item icons and pickup sprites
 - [ ] Style dialogue box, HUD heart button, memory gallery overlay
