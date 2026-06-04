@@ -7,7 +7,10 @@ const FOLLOW_THRESHOLD = 50.0
 const FOLLOW_STOP_DIST = 45.0
 
 @onready var agent = $NavigationAgent2D
-@onready var light = $PointLight2D
+@onready var light  = $PointLight2D
+@onready var anim   = $AnimatedSprite2D
+
+var last_direction = "down"
 
 func _ready():
 	await get_tree().physics_frame
@@ -47,39 +50,64 @@ func _physics_process(_delta):
 			var player_node = main.get_node_or_null("Player")
 			if player_node:
 				var dist = global_position.distance_to(player_node.global_position)
-
 				if dist < FOLLOW_STOP_DIST:
-					# Close enough — stop, no jitter
 					velocity = Vector2.ZERO
 					agent.target_position = global_position
 				else:
-					# Follow BEHIND Player based on direction they are moving
 					var player_dir = Vector2.ZERO
 					if player_node.velocity.length() > 5.0:
 						player_dir = player_node.velocity.normalized()
 					else:
 						player_dir = (player_node.global_position - global_position).normalized()
-
 					var follow_target = player_node.global_position - player_dir * FOLLOW_DISTANCE
 					agent.target_position = follow_target
-
 					if agent.is_navigation_finished():
 						velocity = Vector2.ZERO
 					else:
 						var next = agent.get_next_path_position()
 						velocity = (next - global_position).normalized() * (SPEED * 0.9)
 						move_and_slide()
+		_update_animation()
 		return
 
 	# ── active player ──
 	if agent.is_navigation_finished():
 		velocity = Vector2.ZERO
+		_update_animation()
 		return
 
 	var next = agent.get_next_path_position()
 	velocity = (next - global_position).normalized() * SPEED
 	move_and_slide()
+	_update_animation()
+
+func _update_animation():
+	if velocity.length() > 5:
+		if abs(velocity.x) > abs(velocity.y):
+			if velocity.x > 0:
+				last_direction = "right"
+				if anim.animation != "walk_right":
+					anim.play("walk_right")
+			else:
+				last_direction = "left"
+				if anim.animation != "walk_left":
+					anim.play("walk_left")
+		else:
+			if velocity.y > 0:
+				last_direction = "down"
+				if anim.animation != "walk_down":
+					anim.play("walk_down")
+			else:
+				last_direction = "up"
+				if anim.animation != "walk_up":
+					anim.play("walk_up")
+	else:
+		# Single idle frame — no directional idles needed
+		if anim.animation != "idle":
+			anim.play("idle")
 
 func stop():
 	velocity = Vector2.ZERO
 	$NavigationAgent2D.target_position = global_position
+	if anim.animation != "idle":
+		anim.play("idle")
