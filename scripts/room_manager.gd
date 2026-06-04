@@ -2,7 +2,7 @@
 extends Node
 
 var rooms = [
-	"res://scenes/room_1.tscn",
+	"res://scenes/world.tscn",
 	"res://scenes/room_2.tscn",
 	"res://scenes/room_3.tscn",
 	"res://scenes/room_memory_1.tscn",

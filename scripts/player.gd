@@ -1,10 +1,10 @@
 # player.gd
 extends CharacterBody2D
 
-const SPEED = 120.0
+const SPEED = 60.0
 const FOLLOW_DISTANCE = 55.0
 const FOLLOW_THRESHOLD = 50.0
-const FOLLOW_STOP_DIST = 45.0
+const FOLLOW_STOP_DIST = 20.0
 
 @onready var anim  = $AnimatedSprite2D
 @onready var agent = $NavigationAgent2D

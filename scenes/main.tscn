@@ -34,6 +34,7 @@ pivot_offset = Vector2(-90, 20)
 theme_override_font_sizes/font_size = 36
 text = "♥"
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="FadeRect" type="ColorRect" parent="HUD" unique_id=1699114211]
 process_mode = 3
@@ -42,6 +43,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+metadata/_edit_use_anchors_ = true
 
 [node name="GalleryButton" type="Button" parent="HUD" unique_id=925436201]
 process_mode = 3
@@ -50,8 +52,22 @@ offset_right = 24.0
 offset_bottom = 31.0
 text = "📖"
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="GalleryOverlay" parent="HUD" unique_id=2100038742 instance=ExtResource("5_tefeu")]
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleLabel" parent="HUD/GalleryOverlay" index="0" unique_id=1798177810]
+metadata/_edit_use_anchors_ = true
+
+[node name="CloseButton" parent="HUD/GalleryOverlay" index="1" unique_id=1841321918]
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" parent="HUD/GalleryOverlay" index="2" unique_id=160053071]
+metadata/_edit_use_anchors_ = true
+
+[node name="ItemContainer" parent="HUD/GalleryOverlay" index="3" unique_id=2045799192]
+metadata/_edit_use_anchors_ = true
 
 [node name="RoomNameLabel" type="Label" parent="HUD" unique_id=450503100]
 offset_left = 140.0
@@ -62,6 +78,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="MemoryCounter" type="Label" parent="HUD" unique_id=585792387]
 offset_left = 162.0
@@ -70,8 +87,10 @@ offset_right = 321.0
 offset_bottom = 43.0
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1697850246]
+zoom = Vector2(2.73, 2.73)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
